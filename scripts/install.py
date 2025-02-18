@@ -18,16 +18,18 @@ def check_python_version():
 
 def create_venv():
     """Create a virtual environment if it doesn't exist."""
-    venv_path = Path(".venv")
+    venv_name = "venv" if platform.system() == "Windows" else ".venv"
+    venv_path = Path(venv_name)
     if not venv_path.exists():
         print("Creating virtual environment...")
-        venv.create(".venv", with_pip=True)
+        venv.create(venv_name, with_pip=True)
         return True
     return False
 
 def install_requirements():
     """Install Python package requirements."""
-    pip_cmd = ".venv/bin/pip" if platform.system() != "Windows" else r".venv\Scripts\pip"
+    venv_name = "venv" if platform.system() == "Windows" else ".venv"
+    pip_cmd = f"{venv_name}/bin/pip" if platform.system() != "Windows" else fr"{venv_name}\Scripts\pip"
     subprocess.check_call([pip_cmd, "install", "-r", "requirements.txt"])
 
 def install_ollama():
@@ -80,33 +82,56 @@ def install_ollama():
 
 def main():
     """Main installation routine."""
-    print("Starting installation process...")
+    print("\n=== Starting Installation Process ===\n")
     
-    # Check Python version
-    check_python_version()
-    
-    # Create virtual environment
-    venv_created = create_venv()
-    
-    # Install requirements
-    print("Installing requirements...")
-    install_requirements()
-    
-    # Install Ollama and pull model
-    ollama_ready = install_ollama()
-    
-    print("\nInstallation completed!")
-    if venv_created:
-        print("\nVirtual environment created. To activate:")
-        if platform.system() == "Windows":
-            print("    .venv\\Scripts\\activate")
+    try:
+        # Check Python version
+        print("Checking Python version...")
+        check_python_version()
+        print("✓ Python version OK")
+        
+        # Create virtual environment
+        print("\nSetting up virtual environment...")
+        venv_created = create_venv()
+        if venv_created:
+            print("✓ Virtual environment created")
         else:
-            print("    source .venv/bin/activate")
-    
-    if not ollama_ready:
-        print("\nNOTE: Please complete Ollama setup using the instructions above before proceeding.")
-    
-    print("\nSetup complete! You can now run the application.")
+            print("✓ Using existing virtual environment")
+        
+        # Install requirements
+        print("\nInstalling Python dependencies...")
+        install_requirements()
+        print("✓ Dependencies installed")
+        
+        # Install Ollama and pull model
+        print("\nChecking Ollama installation...")
+        ollama_ready = install_ollama()
+        
+        print("\n=== Installation Summary ===")
+        print("✓ Python environment setup complete")
+        if venv_created:
+            venv_name = "venv" if platform.system() == "Windows" else ".venv"
+            print("\nTo activate virtual environment:")
+            if platform.system() == "Windows":
+                print(f"    {venv_name}\\Scripts\\activate")
+            else:
+                print(f"    source {venv_name}/bin/activate")
+        
+        if not ollama_ready:
+            print("\n⚠ Action Required:")
+            print("Please complete Ollama setup using the instructions above")
+            print("before running the application.")
+            return 1
+        
+        print("\n✓ Setup complete! You can now run the application.")
+        return 0
+        
+    except Exception as e:
+        print(f"\n❌ Error during installation: {str(e)}")
+        return 1
+
+if __name__ == "__main__":
+    sys.exit(main())
 
 if __name__ == "__main__":
     main()
