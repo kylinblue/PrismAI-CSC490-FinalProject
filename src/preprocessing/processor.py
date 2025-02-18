@@ -4,7 +4,11 @@ from ..inferencing.inference import InferenceEngine
 class PromptProcessor:
     def __init__(self):
         """Initialize with two inference engines - one for alignment and one for main processing"""
-        self.alignment_engine = InferenceEngine.create_engine("ollama", "huihui_ai/llama3.2-abliterated")
+        try:
+            self.alignment_engine = InferenceEngine.create_engine("ollama", "huihui_ai/llama3.2-abliterated")
+        except ConnectionError:
+            # Fallback to placeholder if Ollama is not available
+            self.alignment_engine = InferenceEngine.create_engine("placeholder", "llama3.2-abliterated")
         self.main_engine = None  # Will be set based on user selection
 
     def set_main_engine(self, engine_type: str, model_name: str):

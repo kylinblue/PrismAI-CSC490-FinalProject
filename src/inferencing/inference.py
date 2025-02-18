@@ -41,19 +41,23 @@ class OllamaEngine(InferenceEngine):
     def _check_connection(self):
         """Test connection to Ollama server"""
         try:
-            requests.get(self.base_url)
+            requests.get(self.base_url, timeout=2)  # Short timeout to avoid hanging
         except requests.RequestException as e:
+            print(f"Warning: Cannot connect to Ollama server: {str(e)}")
             raise ConnectionError(f"Cannot connect to Ollama server: {str(e)}")
 
     def _check_model(self):
         """Verify if the specified model is available"""
         try:
-            response = requests.get(f"{self.base_url}/tags")
+            response = requests.get(f"{self.base_url}/tags", timeout=2)  # Short timeout
             available_models = [model['name'] for model in response.json()['models']]
             if self.model_name not in available_models:
-                raise ValueError(f"Model {self.model_name} not found. Available models: {', '.join(available_models)}")
+                print(f"Warning: Model {self.model_name} not found")
+                return False
+            return True
         except requests.RequestException as e:
-            raise ConnectionError(f"Cannot check available models: {str(e)}")
+            print(f"Warning: Cannot check available models: {str(e)}")
+            return False
     
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         """Generate a response from the model"""
