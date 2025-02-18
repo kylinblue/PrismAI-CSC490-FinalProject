@@ -3,13 +3,18 @@ from src.preprocessing.processor import PromptProcessor
 
 def create_interface(processor: PromptProcessor) -> gr.Interface:
     def process_prompt(model: str, params: dict, alignment_text: str, prompt: str) -> tuple[str, str]:
-        # First process alignment text
-        alignment_response = processor.process(alignment_text, params)
-        # Then process main prompt
-        final_output = processor.process(prompt, params)
+        # Set the main engine based on selected model
+        processor.set_main_engine("claude" if model == "Claude" else "ollama", model)
+        
+        # First process alignment text with Llama
+        alignment_response = processor.process_alignment(alignment_text, params)
+        
+        # Then process main prompt with selected model, using alignment results
+        final_output = processor.process_main(prompt, alignment_response, params)
+        
         return alignment_response, final_output
 
-    available_models = ["GPT-4", "Claude", "Mistral", "Llama"]
+    available_models = ["GPT-4", "Claude", "Mistral", "Llama", "Placeholder"]
 
     with gr.Blocks() as interface:
         with gr.Row():
@@ -74,6 +79,14 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 lines=5,
                 interactive=False
             )
+
+        # Add review message
+        gr.Markdown("""
+        ### How to use:
+        1. Enter your alignment text and click Submit to see the alignment interpretation
+        2. Review the alignment response
+        3. Enter your main prompt and click Submit again to get the final response
+        """)
 
         with gr.Row():
             submit_btn.click(

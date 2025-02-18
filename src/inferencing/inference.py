@@ -4,6 +4,10 @@ import requests
 import json
 import os
 
+# Constants
+PLACEHOLDER_ENGINE = "placeholder"
+PLACEHOLDER_MODEL = "placeholder-model"
+
 class InferenceEngine(ABC):
     """Abstract base class for inference engines"""
     
@@ -11,6 +15,18 @@ class InferenceEngine(ABC):
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         """Generate a response from the model"""
         pass
+
+    @staticmethod
+    def create_engine(engine_type: str = "ollama", model_name: str = "huihui_ai/llama3.2-abliterated") -> 'InferenceEngine':
+        """Factory method to create appropriate inference engine"""
+        if engine_type == "ollama":
+            return OllamaEngine(model_name)
+        elif engine_type == "claude":
+            return ClaudeEngine(model_name)
+        elif engine_type == PLACEHOLDER_ENGINE:
+            return PlaceholderEngine(model_name)
+        else:
+            raise ValueError(f"Unsupported engine type: {engine_type}")
 
 class OllamaEngine(InferenceEngine):
     """Ollama inference engine implementation"""
@@ -67,6 +83,16 @@ class OllamaEngine(InferenceEngine):
             return f"Error parsing Ollama response: {str(e)}"
         except requests.RequestException as e:
             return f"Network error with Ollama inference: {str(e)}"
+
+class PlaceholderEngine(InferenceEngine):
+    """Placeholder engine for testing and development"""
+    
+    def __init__(self, model_name: str = PLACEHOLDER_MODEL):
+        self.model_name = model_name
+    
+    def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
+        """Return a placeholder response"""
+        return f"[Placeholder Response]\nModel: {self.model_name}\nPrompt: {prompt}\nParams: {params}"
 
 class ClaudeEngine(InferenceEngine):
     """Claude API inference engine implementation"""
