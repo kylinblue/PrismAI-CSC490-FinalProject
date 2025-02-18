@@ -1,11 +1,15 @@
 from typing import Dict, Any
-import requests
-import json
+from ..inferencing.inference import InferenceEngine, OllamaEngine, ClaudeEngine
 
 class PromptProcessor:
-    def __init__(self, model_name: str = "mistral"):
-        self.model_name = model_name
-        self.api_url = "http://localhost:11434/api/generate"
+    def __init__(self, engine: str = "ollama", model_name: str = "mistral"):
+        """Initialize with specified engine type and model name"""
+        if engine == "ollama":
+            self.engine = OllamaEngine(model_name)
+        elif engine == "claude":
+            self.engine = ClaudeEngine(model_name)
+        else:
+            raise ValueError(f"Unsupported engine type: {engine}")
 
     def process(self, prompt: str, params: Dict[Any, Any]) -> str:
         # Extract parameters
@@ -22,17 +26,5 @@ class PromptProcessor:
         # Combine system context with the prompt
         full_prompt = f"{system_context}\n\nUser: {prompt}"
 
-        # Make API request
-        response = requests.post(
-            self.api_url,
-            json={
-                "model": self.model_name,
-                "prompt": full_prompt,
-                "temperature": creativity  # Map creativity to temperature
-            }
-        )
-
-        try:
-            return response.json()['response']
-        except (KeyError, json.JSONDecodeError) as e:
-            return f"Error processing request: {str(e)}"
+        # Use the inference engine to generate response
+        return self.engine.generate(full_prompt, params)
