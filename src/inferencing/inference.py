@@ -15,7 +15,7 @@ class InferenceEngine(ABC):
 class OllamaEngine(InferenceEngine):
     """Ollama inference engine implementation"""
     
-    def __init__(self, model_name: str = "mistral"):
+    def __init__(self, model_name: str = "huihui_ai/llama3.2-abliterated"):
         self.model_name = model_name
         self.base_url = "http://localhost:11434/api"
         self.generate_url = f"{self.base_url}/generate"
