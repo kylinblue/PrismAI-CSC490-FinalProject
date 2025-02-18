@@ -7,9 +7,9 @@ from pathlib import Path
 
 def check_python_version():
     """Check if Python version meets requirements."""
-    if sys.version_info < (3, 8):
+    if sys.version_info < (3, 11):
         print("\n========================================================")
-        print("ERROR: Python 3.8 or higher is required")
+        print("ERROR: Python 3.11 or higher is required")
         print("Current version:", sys.version.split()[0])
         print("\nPlease download and install a newer version from:")
         print("https://www.python.org/downloads/")
