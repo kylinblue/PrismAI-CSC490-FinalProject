@@ -23,5 +23,5 @@ if errorlevel 1 (
 
 echo Installation completed successfully!
 echo To start using the application, activate the virtual environment:
-echo     .venv\Scripts\activate
+echo     .venv\Scripts\activate.bat
 pause

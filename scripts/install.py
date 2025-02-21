@@ -18,7 +18,7 @@ def check_python_version():
 
 def create_venv():
     """Create a virtual environment if it doesn't exist."""
-    venv_name = "venv" if platform.system() == "Windows" else ".venv"
+    venv_name = ".venv"
     venv_path = Path(venv_name)
     if not venv_path.exists():
         print("Creating virtual environment...")
@@ -28,7 +28,7 @@ def create_venv():
 
 def install_requirements():
     """Install Python package requirements."""
-    venv_name = "venv" if platform.system() == "Windows" else ".venv"
+    venv_name = ".venv"
     pip_cmd = f"{venv_name}/bin/pip" if platform.system() != "Windows" else fr"{venv_name}\Scripts\pip"
     subprocess.check_call([pip_cmd, "install", "-r", "requirements.txt"])
 
@@ -110,7 +110,7 @@ def main():
         print("\n=== Installation Summary ===")
         print("✓ Python environment setup complete")
         if venv_created:
-            venv_name = "venv" if platform.system() == "Windows" else ".venv"
+            venv_name = ".venv"
             print("\nTo activate virtual environment:")
             if platform.system() == "Windows":
                 print(f"    {venv_name}\\Scripts\\activate")
