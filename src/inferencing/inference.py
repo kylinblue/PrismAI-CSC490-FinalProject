@@ -17,7 +17,7 @@ class InferenceEngine(ABC):
         pass
 
     @staticmethod
-    def create_engine(engine_type: str = "ollama", model_name: str = "huihui_ai/llama3.2-abliterated") -> 'InferenceEngine':
+    def create_engine(engine_type: str = "ollama", model_name: str = "llama3") -> 'InferenceEngine':
         """Factory method to create appropriate inference engine"""
         if engine_type == "ollama":
             return OllamaEngine(model_name)
@@ -31,12 +31,16 @@ class InferenceEngine(ABC):
 class OllamaEngine(InferenceEngine):
     """Ollama inference engine implementation"""
     
-    def __init__(self, model_name: str = "huihui_ai/llama3.2-abliterated"):
+    def __init__(self, model_name: str = "llama3"):
         self.model_name = model_name
         self.base_url = "http://localhost:11434/api"
         self.generate_url = f"{self.base_url}/generate"
-        self._check_connection()
-        self._check_model()
+        try:
+            self._check_connection()
+            self._check_model()
+        except Exception as e:
+            print(f"Warning: Ollama initialization issue: {str(e)}")
+            # Continue anyway - the model might be available later
     
     def _check_connection(self):
         """Test connection to Ollama server"""
@@ -49,12 +53,22 @@ class OllamaEngine(InferenceEngine):
     def _check_model(self):
         """Verify if the specified model is available"""
         try:
-            response = requests.get(f"{self.base_url}/tags", timeout=2)  # Short timeout
+            response = requests.get(f"{self.base_url}/tags", timeout=5)  # Longer timeout
             available_models = [model['name'] for model in response.json()['models']]
-            if self.model_name not in available_models:
-                print(f"Warning: Model {self.model_name} not found")
-                return False
-            return True
+            
+            # Check if the exact model name exists
+            if self.model_name in available_models:
+                return True
+                
+            # Check if model name is a prefix of any available model
+            for model in available_models:
+                if model.startswith(self.model_name) or self.model_name in model:
+                    print(f"Found similar model: {model}, using it instead of {self.model_name}")
+                    self.model_name = model
+                    return True
+                    
+            print(f"Warning: Model {self.model_name} not found. Available models: {available_models}")
+            return False
         except requests.RequestException as e:
             print(f"Warning: Cannot check available models: {str(e)}")
             return False
@@ -62,17 +76,26 @@ class OllamaEngine(InferenceEngine):
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         """Generate a response from the model"""
         try:
+            # Prepare request payload
+            payload = {
+                "model": self.model_name,
+                "prompt": prompt,
+                "temperature": params.get('creativity', 0.5),
+                "stream": False,
+                "format": params.get('format', 'text')
+            }
+            
+            # Add optional parameters only if they exist
+            if 'context' in params and params['context']:
+                payload["context"] = params['context']
+            if 'system_prompt' in params and params['system_prompt']:
+                payload["system"] = params['system_prompt']
+                
+            print(f"Sending request to Ollama with model: {self.model_name}")
             response = requests.post(
                 self.generate_url,
-                json={
-                    "model": self.model_name,
-                    "prompt": prompt,
-                    "temperature": params.get('creativity', 0.5),
-                    "stream": False,
-                    "context": params.get('context', []),
-                    "system": params.get('system_prompt', ''),
-                    "format": params.get('format', 'text')
-                }
+                json=payload,
+                timeout=60  # Longer timeout for model inference
             )
             response.raise_for_status()
             return response.json()['response']

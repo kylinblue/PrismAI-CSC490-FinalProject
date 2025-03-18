@@ -5,10 +5,11 @@ class PromptProcessor:
     def __init__(self):
         """Initialize with two inference engines - one for alignment and one for main processing"""
         try:
-            self.alignment_engine = InferenceEngine.create_engine("ollama", "huihui_ai/llama3.2-abliterated")
+            # Use a standard Ollama model name (llama3 is the correct format)
+            self.alignment_engine = InferenceEngine.create_engine("ollama", "llama3")
         except ConnectionError:
             # Fallback to placeholder if Ollama is not available
-            self.alignment_engine = InferenceEngine.create_engine("placeholder", "llama3.2-abliterated")
+            self.alignment_engine = InferenceEngine.create_engine("placeholder", "llama3")
         self.main_engine = None  # Will be set based on user selection
 
     def set_main_engine(self, engine_type: str, model_name: str):
