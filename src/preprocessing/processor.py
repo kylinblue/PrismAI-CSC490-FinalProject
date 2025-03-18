@@ -23,24 +23,97 @@ class PromptProcessor:
 
     def process_alignment(self, alignment_text: str, params: Dict[Any, Any]) -> str:
         """Process the alignment text with the Llama model"""
+        if not self.alignment_engine:
+            return "Error: No alignment engine available"
+            
+        if not alignment_text or alignment_text.strip() == "":
+            return "Please provide alignment text to analyze"
+            
         # TODO: Improve alignment steps logic
         system_context = (
             "You are an AI alignment specialist. Analyze the following text "
-            "and provide a concise interpretation that will help guide the main model's behavior."
+            "and provide a concise interpretation that will help guide the main model's behavior. "
+            "Respond with plain text, not JSON."
         )
         full_prompt = f"{system_context}\n\nText to analyze: {alignment_text}"
-        return self.alignment_engine.generate(full_prompt, params)
+        
+        # Create a copy of params and remove any format parameter
+        alignment_params = params.copy()
+        if 'format' in alignment_params:
+            del alignment_params['format']  # Remove format parameter entirely
+        
+        # Mark this as an alignment request and get the response
+        alignment_params['is_alignment'] = True
+        response = self.alignment_engine.generate(full_prompt, alignment_params)
+        
+        # Handle potential JSON responses
+        import json
+        try:
+            # Check if the response is JSON
+            if response and response.strip().startswith('{') and response.strip().endswith('}'):
+                print(f"DEBUG: Detected JSON response: {response[:100]}...")
+                json_response = json.loads(response)
+                # Extract content from common JSON response formats
+                if isinstance(json_response, dict):
+                    if 'response' in json_response:
+                        response = json_response['response']
+                        print(f"DEBUG: Extracted 'response' field: {response[:100]}...")
+                    elif 'content' in json_response:
+                        response = json_response['content']
+                        print(f"DEBUG: Extracted 'content' field: {response[:100]}...")
+                    elif 'message' in json_response:
+                        response = json_response['message']
+                        print(f"DEBUG: Extracted 'message' field: {response[:100]}...")
+                    elif 'text' in json_response:
+                        response = json_response['text']
+                        print(f"DEBUG: Extracted 'text' field: {response[:100]}...")
+                    else:
+                        # If we can't find a known field, convert the whole JSON to a string
+                        print(f"DEBUG: No known fields found in JSON, using stringified version")
+                        response = json.dumps(json_response, indent=2)
+        except (json.JSONDecodeError, TypeError, ValueError) as e:
+            # Not valid JSON or other error, use the response as is
+            print(f"DEBUG: JSON parsing error: {str(e)}")
+        
+        # If the response is empty or just contains {}, return a helpful message
+        if not response or response.strip() in ["", "{}", "{", "}"]:
+            print(f"DEBUG: Empty or invalid response detected: '{response}'")
+            return "The alignment engine did not provide a valid response. Please try again."
+            
+        print(f"DEBUG: Final alignment response: {response[:100]}...")
+            
+        return response
 
     def preprocess_main_prompt(self, prompt: str) -> str:
         """Preprocess the main prompt before sending to the model"""
-        # Placeholder for text preprocessing
-        # TODO: Implement actual preprocessing logic
-        return prompt
+        # Basic preprocessing steps:
+        # 1. Trim whitespace
+        processed = prompt.strip()
+        
+        # 2. Ensure the prompt ends with a question mark if it seems like a question
+        question_starters = ["what", "how", "why", "when", "where", "who", "which", "can", "could", "would", "should", "is", "are", "do", "does"]
+        words = processed.lower().split()
+        if words and words[0] in question_starters and not processed.endswith("?"):
+            processed += "?"
+            
+        # 3. Add a polite prefix if the prompt is very short (likely a command)
+        if len(processed.split()) < 4 and not any(q in processed.lower() for q in question_starters):
+            processed = f"Please {processed.lower()}"
+            
+        # 4. Ensure proper capitalization
+        if processed and processed[0].islower():
+            processed = processed[0].upper() + processed[1:]
+            
+        return processed
 
     def process_main(self, prompt: str, alignment_result: str, params: Dict[Any, Any]) -> str:
         """Process the main prompt using the alignment result"""
         if not self.main_engine:
             raise ValueError("Main engine not set. Call set_main_engine first.")
+            
+        # Ensure this is marked as a main request (not alignment)
+        main_params = params.copy()
+        main_params['is_alignment'] = False
 
         # Preprocess the prompt
         processed_prompt = self.preprocess_main_prompt(prompt)
@@ -58,4 +131,43 @@ class PromptProcessor:
         )
 
         full_prompt = f"{system_context}\n\nUser: {processed_prompt}"
-        return self.main_engine.generate(full_prompt, params)
+        
+        # Generate the response
+        response = self.main_engine.generate(full_prompt, main_params)
+        
+        # Handle potential JSON parsing issues
+        import json
+        try:
+            # Check if the response is JSON
+            if response and response.strip().startswith('{') and response.strip().endswith('}'):
+                print(f"DEBUG: Main model returned JSON response: {response[:100]}...")
+                json_response = json.loads(response)
+                # Extract content from common JSON response formats
+                if isinstance(json_response, dict):
+                    if 'response' in json_response:
+                        response = json_response['response']
+                        print(f"DEBUG: Extracted 'response' field from main model: {response[:100]}...")
+                    elif 'content' in json_response:
+                        response = json_response['content']
+                        print(f"DEBUG: Extracted 'content' field from main model: {response[:100]}...")
+                    elif 'message' in json_response:
+                        response = json_response['message']
+                        print(f"DEBUG: Extracted 'message' field from main model: {response[:100]}...")
+                    elif 'text' in json_response:
+                        response = json_response['text']
+                        print(f"DEBUG: Extracted 'text' field from main model: {response[:100]}...")
+                    else:
+                        # If we can't find a known field, convert the whole JSON to a string
+                        print(f"DEBUG: No known fields found in main model JSON, using stringified version")
+                        response = json.dumps(json_response, indent=2)
+        except (json.JSONDecodeError, TypeError, ValueError) as e:
+            # Not valid JSON or other error, use the response as is
+            print(f"DEBUG: Main model JSON parsing error: {str(e)}")
+        
+        # If the response is empty or just contains {}, return a helpful message
+        if not response or response.strip() in ["", "{}", "{", "}", "[]"]:
+            print(f"DEBUG: Empty or invalid main model response detected: '{response}'")
+            return "The model did not provide a valid response. Please try again with different parameters or prompt."
+            
+        print(f"DEBUG: Final main model response: {response[:100]}...")
+        return response

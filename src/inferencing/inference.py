@@ -68,16 +68,41 @@ class OllamaEngine(InferenceEngine):
         """Verify if the specified model is available"""
         try:
             response = requests.get(f"{self.base_url}/tags", timeout=5)  # Longer timeout
-            available_models = [model['name'] for model in response.json()['models']]
+            if response.status_code != 200:
+                print(f"Warning: Ollama API returned status {response.status_code}")
+                return False
+                
+            data = response.json()
+            if 'models' not in data:
+                print(f"Warning: Unexpected response format from Ollama API: {data}")
+                return False
+                
+            available_models = [model['name'] for model in data['models']]
+            print(f"DEBUG: Available Ollama models: {available_models}")
             
             # Check if the exact model name exists
             if self.model_name in available_models:
+                print(f"DEBUG: Found exact model match: {self.model_name}")
                 return True
                 
-            # Check if model name is a prefix of any available model
+            # For models with namespaces (containing slashes) or tags (containing colons)
+            # We need to be more flexible in matching
+            model_base = self.model_name.split(':')[0]  # Remove tag if present
+            model_base = model_base.split('/')[-1]  # Get just the model name without namespace
+            
+            print(f"DEBUG: Looking for model base: {model_base}")
+            
+            # Try matching with more flexibility
             for model in available_models:
+                # Check if model name is a prefix of any available model
                 if model.startswith(self.model_name) or self.model_name in model:
                     print(f"Found similar model: {model}, using it instead of {self.model_name}")
+                    self.model_name = model
+                    return True
+                
+                # Check if the base model name matches
+                if model_base and (model_base in model or model.endswith(model_base)):
+                    print(f"Found model with matching base name: {model}, using it instead of {self.model_name}")
                     self.model_name = model
                     return True
                     
@@ -90,14 +115,38 @@ class OllamaEngine(InferenceEngine):
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         """Generate a response from the model"""
         try:
+            # Verify model is available before attempting to use it
+            if not self._check_model():
+                return f"Error: Model '{self.model_name}' is not available in Ollama"
+            
             # Prepare request payload
+            # Ensure creativity/temperature is a float value
+            creativity = params.get('creativity', 0.5)
+            if not isinstance(creativity, (int, float)):
+                try:
+                    creativity = float(creativity)
+                except (ValueError, TypeError):
+                    creativity = 0.5
+            
             payload = {
                 "model": self.model_name,
                 "prompt": prompt,
-                "temperature": params.get('creativity', 0.5),
-                "stream": False,
-                "format": params.get('format', 'text')
+                "temperature": creativity,
+                "stream": False
             }
+            
+            # Debug information
+            print(f"DEBUG: Using Ollama model: {self.model_name}")
+            
+            # For alignment requests, don't add format
+            # For main requests, don't force JSON format as it's causing issues
+            if params.get('is_alignment', False):
+                # Don't add format for alignment requests
+                if 'format' in payload:
+                    del payload['format']
+            # Don't force JSON format for main requests either
+                
+            print(f"DEBUG: Request payload: {json.dumps(payload, indent=2)}")
             
             # Add optional parameters only if they exist
             if 'context' in params and params['context']:
@@ -106,20 +155,80 @@ class OllamaEngine(InferenceEngine):
                 payload["system"] = params['system_prompt']
                 
             print(f"Sending request to Ollama with model: {self.model_name}")
-            response = requests.post(
-                self.generate_url,
-                json=payload,
-                timeout=60  # Longer timeout for model inference
-            )
+            try:
+                response = requests.post(
+                    self.generate_url,
+                    json=payload,
+                    timeout=180  # Even longer timeout for model inference
+                )
+                print(f"DEBUG: Ollama response status: {response.status_code}")
+            except Exception as e:
+                print(f"DEBUG: Ollama request exception: {str(e)}")
+                raise
             response.raise_for_status()
-            return response.json()['response']
-        except requests.HTTPError as e:
-            if e.response.status_code == 404:
-                return f"Model {self.model_name} not found"
-            elif e.response.status_code == 500:
-                return "Internal Ollama server error"
+            result = response.json()
+            if 'response' not in result:
+                print(f"DEBUG: Unexpected Ollama response format: {result}")
+                return f"Error: Unexpected response format from Ollama"
+            # Extract the response based on format and request type
+            if 'response' in result:
+                response_text = result['response']
+                print(f"DEBUG: Extracted response from Ollama: {response_text[:100]}...")
+                
+                # Try to parse JSON responses regardless of format parameter
+                try:
+                    # Check if the response looks like JSON
+                    if response_text and response_text.strip().startswith('{') and response_text.strip().endswith('}'):
+                        print(f"DEBUG: Response appears to be JSON, attempting to parse")
+                        json_obj = json.loads(response_text)
+                        if isinstance(json_obj, dict):
+                            # Extract the content from the JSON
+                            if 'response' in json_obj:
+                                print(f"DEBUG: Extracted 'response' field from JSON")
+                                return json_obj['response']
+                            elif 'content' in json_obj:
+                                print(f"DEBUG: Extracted 'content' field from JSON")
+                                return json_obj['content']
+                            elif 'message' in json_obj:
+                                print(f"DEBUG: Extracted 'message' field from JSON")
+                                return json_obj['message']
+                            elif 'text' in json_obj:
+                                print(f"DEBUG: Extracted 'text' field from JSON")
+                                return json_obj['text']
+                            else:
+                                print(f"DEBUG: No standard fields found in JSON response")
+                                # If it's an empty object or we can't find known fields
+                                if not json_obj or json_obj == {}:
+                                    print(f"DEBUG: Empty JSON object detected")
+                                    return "The model returned an empty response. Please try again."
+                                # Return the stringified JSON as fallback
+                                return json.dumps(json_obj, indent=2)
+                    # If it doesn't look like JSON or parsing fails, return as is
+                    return response_text
+                except json.JSONDecodeError as e:
+                    print(f"DEBUG: JSON parsing error: {str(e)}")
+                    # Not valid JSON, return as is
+                    return response_text
+                
+                return response_text
             else:
-                return f"HTTP error occurred: {str(e)}"
+                print(f"DEBUG: Unexpected Ollama response format: {result}")
+                return f"Error: Unexpected response format from Ollama"
+        except requests.HTTPError as e:
+            error_msg = f"Model {self.model_name} not found"
+            try:
+                error_json = e.response.json()
+                if 'error' in error_json:
+                    error_msg = f"Ollama error: {error_json['error']}"
+            except:
+                pass
+                
+            if e.response.status_code == 404:
+                return error_msg
+            elif e.response.status_code == 500:
+                return f"Internal Ollama server error: {error_msg}"
+            else:
+                return f"HTTP error occurred: {str(e)} - {error_msg}"
         except (KeyError, json.JSONDecodeError) as e:
             return f"Error parsing Ollama response: {str(e)}"
         except requests.RequestException as e:
