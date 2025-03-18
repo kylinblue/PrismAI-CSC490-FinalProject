@@ -33,6 +33,7 @@ class PromptProcessor:
         system_context = (
             "You are an AI alignment specialist. Analyze the following text "
             "and provide a concise interpretation that will help guide the main model's behavior. "
+            "Focus on extracting key principles, constraints, and goals from the text. "
             "Respond with plain text, not JSON."
         )
         full_prompt = f"{system_context}\n\nText to analyze: {alignment_text}"
@@ -106,6 +107,46 @@ class PromptProcessor:
             
         return processed
 
+    def optimize_prompt(self, original_prompt: str, alignment_result: str, params: Dict[Any, Any]) -> str:
+        """Use the alignment engine to optimize the user's prompt based on alignment principles"""
+        if not self.alignment_engine:
+            return original_prompt
+            
+        # Create a copy of params for the alignment engine
+        alignment_params = params.copy()
+        alignment_params['is_alignment'] = True
+        
+        system_context = (
+            "You are an AI prompt optimizer. Your job is to rewrite the user's prompt "
+            "to better align with the principles in the alignment context.\n\n"
+            f"Alignment context: {alignment_result}\n\n"
+            "Rules for optimization:\n"
+            "1. Preserve the user's original intent and question\n"
+            "2. Add relevant context from the alignment principles\n"
+            "3. Clarify ambiguities in the original prompt\n"
+            "4. Add constraints or guidance based on the alignment context\n"
+            "5. DO NOT answer the prompt yourself, just optimize it\n"
+            "6. Return ONLY the optimized prompt text, nothing else\n"
+        )
+        
+        full_prompt = f"{system_context}\n\nOriginal prompt: {original_prompt}\n\nOptimized prompt:"
+        
+        # Get the optimized prompt from the alignment engine
+        optimized_prompt = self.alignment_engine.generate(full_prompt, alignment_params)
+        
+        # Clean up the response
+        optimized_prompt = optimized_prompt.strip()
+        
+        # If optimization failed or returned empty, use the original
+        if not optimized_prompt or len(optimized_prompt) < 5:
+            print("DEBUG: Prompt optimization failed, using original prompt")
+            return original_prompt
+            
+        print(f"DEBUG: Original prompt: {original_prompt}")
+        print(f"DEBUG: Optimized prompt: {optimized_prompt}")
+        
+        return optimized_prompt
+
     def process_main(self, prompt: str, alignment_result: str, params: Dict[Any, Any]) -> str:
         """Process the main prompt using the alignment result"""
         if not self.main_engine:
@@ -117,10 +158,21 @@ class PromptProcessor:
 
         # Preprocess the prompt
         processed_prompt = self.preprocess_main_prompt(prompt)
+        
+        # Optimize the prompt using the alignment engine
+        optimized_prompt = self.optimize_prompt(processed_prompt, alignment_result, params)
 
-        style = params.get('style', 'Professional')
-        tone = params.get('tone', 'Neutral')
-        creativity = params.get('creativity', 0.5)
+        # Extract values from params
+        style = str(params.get('style', 'Professional'))
+        tone = str(params.get('tone', 'Neutral'))
+        
+        # Ensure creativity is a float
+        try:
+            creativity = float(params.get('creativity', 0.5))
+        except (ValueError, TypeError):
+            creativity = 0.5
+            
+        print(f"DEBUG: Using style={style}, tone={tone}, creativity={creativity}")
 
         system_context = (
             f"Respond in a {style.lower()} style with a {tone.lower()} tone. "
@@ -130,7 +182,7 @@ class PromptProcessor:
             "Please provide a response that takes this alignment into account."
         )
 
-        full_prompt = f"{system_context}\n\nUser: {processed_prompt}"
+        full_prompt = f"{system_context}\n\nUser: {optimized_prompt}"
         
         # Generate the response
         response = self.main_engine.generate(full_prompt, main_params)

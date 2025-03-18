@@ -43,7 +43,10 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
             actual_model = custom_model if use_custom_model and custom_model else model
             print(f"Using alignment model: {actual_model} with engine: {engine_type}")
             
-            # First process alignment text with selected model
+            # Set the alignment engine explicitly before processing
+            processor.alignment_engine = InferenceEngine.create_engine(engine_type, actual_model)
+            
+            # Process alignment text with selected model
             alignment_response = processor.process_alignment(alignment_text, params)
             
             return alignment_response
@@ -74,20 +77,27 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
     
     def process_full_pipeline(alignment_engine_type: str, alignment_model: str, alignment_use_custom: bool, alignment_custom_model: str,
                              main_engine_type: str, main_model: str, main_use_custom: bool, main_custom_model: str,
-                             params: dict, alignment_text: str, prompt: str) -> tuple[str, str]:
+                             alignment_text: str, prompt: str) -> tuple[str, str]:
         """Process both alignment and main prompt in one go"""
         try:
+            # Create params dictionary with actual values from the outer scope
+            style_value = params["style"].value if hasattr(params["style"], "value") else params["style"]
+            tone_value = params["tone"].value if hasattr(params["tone"], "value") else params["tone"]
+            creativity_value = params["creativity"].value if hasattr(params["creativity"], "value") else params["creativity"]
+            
+            process_params = get_params_dict(style_value, tone_value, creativity_value)
+            
             # Process alignment first
             alignment_response = process_alignment_only(
                 alignment_engine_type, alignment_model, alignment_use_custom, alignment_custom_model,
-                params, alignment_text
+                process_params, alignment_text
             )
             
             # Then process main prompt
             final_output = process_prompt(
                 alignment_engine_type, alignment_model, alignment_use_custom, alignment_custom_model,
                 main_engine_type, main_model, main_use_custom, main_custom_model,
-                params, alignment_text, alignment_response, prompt
+                process_params, alignment_text, alignment_response, prompt
             )
             
             return alignment_response, final_output
@@ -268,6 +278,8 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
         1. Enter your alignment text and click Submit to see the alignment interpretation
         2. Review the alignment response
         3. Enter your main prompt and click Submit again to get the final response
+        
+        Note: The system will optimize your prompt based on the alignment principles before sending it to the main model.
         """)
 
         # Add functionality for alignment buttons
@@ -278,11 +290,7 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 model_dropdown,   # Use the alignment model dropdown
                 custom_model_checkbox,
                 custom_model_input,
-                gr.JSON({
-                    "style": params["style"],
-                    "tone": params["tone"],
-                    "creativity": params["creativity"]
-                }),
+                gr.JSON(lambda: get_params_dict(params["style"].value, params["tone"].value, params["creativity"].value)),
                 alignment_input
             ],
             outputs=alignment_output
@@ -301,13 +309,13 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 # Use custom model name if checkbox is checked
                 actual_main_model = main_custom_model if main_use_custom and main_custom_model else main_model
                 print(f"Using main model: {actual_main_model} with engine: {main_engine_type}")
-                
+            
                 # Set the main engine based on selected engine and model
                 processor.set_main_engine(main_engine_type, actual_main_model)
-                
+            
                 # Process main prompt with selected model, using existing alignment results
                 final_output = processor.process_main(prompt, alignment_result, params_dict)
-                
+            
                 return final_output
             except Exception as e:
                 error_message = f"Error processing main prompt: {str(e)}"
@@ -316,7 +324,7 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
         
         # Main submit button for full pipeline (only when no alignment has been done yet)
         submit_btn.click(
-            fn=lambda alignment_output, *args: process_full_pipeline(*args) if not alignment_output.strip() else (alignment_output, process_main_only(args[4], args[5], args[6], args[7], args[8], alignment_output, args[10])),
+            fn=lambda alignment_output, *args: process_full_pipeline(*args) if not alignment_output.strip() else (alignment_output, process_main_only(args[4], args[5], args[6], args[7], get_params_dict(params["style"].value, params["tone"].value, params["creativity"].value), alignment_output, args[9])),
             inputs=[
                 alignment_output,  # Check if alignment is already done
                 engine_dropdown,
@@ -327,11 +335,6 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 main_model_dropdown,
                 main_custom_model_checkbox,
                 main_custom_model_input,
-                gr.JSON({
-                    "style": params["style"],
-                    "tone": params["tone"],
-                    "creativity": params["creativity"]
-                }),
                 alignment_input,
                 prompt_input
             ],
