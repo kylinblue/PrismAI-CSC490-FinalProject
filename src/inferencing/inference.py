@@ -4,10 +4,6 @@ import requests
 import json
 import os
 
-# Constants
-PLACEHOLDER_ENGINE = "placeholder"
-PLACEHOLDER_MODEL = "placeholder-model"
-
 class InferenceEngine(ABC):
     """Abstract base class for inference engines"""
     
@@ -23,10 +19,15 @@ class InferenceEngine(ABC):
             return OllamaEngine(model_name)
         elif engine_type == "claude":
             return ClaudeEngine(model_name)
-        elif engine_type == PLACEHOLDER_ENGINE:
-            return PlaceholderEngine(model_name)
+        elif engine_type == "openai":
+            return OpenAIEngine(model_name)
         else:
             raise ValueError(f"Unsupported engine type: {engine_type}")
+    
+    @staticmethod
+    def get_available_engines() -> list:
+        """Return list of available inference engines"""
+        return ["ollama", "claude", "openai"]
 
 class OllamaEngine(InferenceEngine):
     """Ollama inference engine implementation"""
@@ -41,6 +42,19 @@ class OllamaEngine(InferenceEngine):
         except Exception as e:
             print(f"Warning: Ollama initialization issue: {str(e)}")
             # Continue anyway - the model might be available later
+    
+    @staticmethod
+    def get_available_models() -> list:
+        """Get list of available Ollama models"""
+        try:
+            base_url = "http://localhost:11434/api"
+            response = requests.get(f"{base_url}/tags", timeout=5)
+            if response.status_code == 200:
+                return [model['name'] for model in response.json().get('models', [])]
+            return []
+        except Exception as e:
+            print(f"Warning: Cannot fetch Ollama models: {str(e)}")
+            return []
     
     def _check_connection(self):
         """Test connection to Ollama server"""
@@ -111,15 +125,49 @@ class OllamaEngine(InferenceEngine):
         except requests.RequestException as e:
             return f"Network error with Ollama inference: {str(e)}"
 
-class PlaceholderEngine(InferenceEngine):
-    """Placeholder engine for testing and development"""
+class OpenAIEngine(InferenceEngine):
+    """OpenAI API inference engine implementation"""
     
-    def __init__(self, model_name: str = PLACEHOLDER_MODEL):
+    def __init__(self, model_name: str = "gpt-3.5-turbo"):
         self.model_name = model_name
+        self.api_url = "https://api.openai.com/v1/chat/completions"
+        self.api_key = os.getenv("OPENAI_API_KEY")
+        if not self.api_key:
+            raise ValueError("OPENAI_API_KEY environment variable not set")
+    
+    @staticmethod
+    def get_available_models() -> list:
+        """Get list of available OpenAI models"""
+        # These are the standard OpenAI models
+        return [
+            "gpt-3.5-turbo", 
+            "gpt-4", 
+            "gpt-4-turbo", 
+            "gpt-4o",
+            "gpt-4-vision"
+        ]
     
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
-        """Return a placeholder response"""
-        return f"[Placeholder Response]\nModel: {self.model_name}\nPrompt: {prompt}\nParams: {params}"
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+            
+            response = requests.post(
+                self.api_url,
+                headers=headers,
+                json={
+                    "model": self.model_name,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "temperature": params.get('creativity', 0.5)
+                }
+            )
+            response.raise_for_status()
+            return response.json()['choices'][0]['message']['content']
+        except (KeyError, json.JSONDecodeError, requests.RequestException) as e:
+            return f"Error with OpenAI inference: {str(e)}"
+
 
 class ClaudeEngine(InferenceEngine):
     """Claude API inference engine implementation"""
@@ -130,6 +178,12 @@ class ClaudeEngine(InferenceEngine):
         self.api_key = os.getenv("ANTHROPIC_API_KEY")
         if not self.api_key:
             raise ValueError("ANTHROPIC_API_KEY environment variable not set")
+    
+    @staticmethod
+    def get_available_models() -> list:
+        """Get list of available Claude models"""
+        # These are the standard Claude models
+        return ["claude-2", "claude-instant-1", "claude-3-opus", "claude-3-sonnet", "claude-3-haiku"]
     
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         try:

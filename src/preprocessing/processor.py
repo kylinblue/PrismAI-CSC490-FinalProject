@@ -1,5 +1,5 @@
 from typing import Dict, Any, Tuple
-from ..inferencing.inference import InferenceEngine
+from src.inferencing.inference import InferenceEngine
 
 class PromptProcessor:
     def __init__(self):
@@ -8,8 +8,13 @@ class PromptProcessor:
             # Use a standard Ollama model name (llama3 is the correct format)
             self.alignment_engine = InferenceEngine.create_engine("ollama", "llama3")
         except ConnectionError:
-            # Fallback to placeholder if Ollama is not available
-            self.alignment_engine = InferenceEngine.create_engine("placeholder", "llama3")
+            # Fallback to OpenAI if Ollama is not available
+            try:
+                self.alignment_engine = InferenceEngine.create_engine("openai", "gpt-3.5-turbo")
+            except Exception as e:
+                print(f"Warning: Could not initialize any alignment engine: {str(e)}")
+                # No fallback available, will need to be set later
+                self.alignment_engine = None
         self.main_engine = None  # Will be set based on user selection
 
     def set_main_engine(self, engine_type: str, model_name: str):
