@@ -3,4 +3,3 @@ transformers
 requests  # for Ollama API
 python-dotenv  # for environment variables
 pytest  # for testing
-torch  # for GPU acceleration

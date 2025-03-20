@@ -71,8 +71,7 @@ def install_ollama():
     
     # Pull required models
     models_to_pull = [
-        {"name": "mistral", "source": "mistral"},
-        {"name": "llama3.2-3b", "source": "huihui-ai/Llama-3.2-3B-Instruct-abliterated"},
+        {"name": "llama3.2-3b-Instruct-abliterated", "source": "huihui-ai/Llama-3.2-3B-Instruct-abliterated"},
         {"name": "llama3.1-8b", "source": "meta-llama/Llama-3.1-8B"}
     ]
     
