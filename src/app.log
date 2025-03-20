@@ -1,0 +1,234 @@
+2025-03-18 15:12:17,171 - __main__ - INFO - Starting application
+2025-03-18 15:12:17,171 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:12:17,175 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:12:17,250 - __main__ - INFO - Interface created successfully
+2025-03-18 15:12:17,305 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:12:17,312 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:12:17,640 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:16:21,963 - __main__ - INFO - Starting application
+2025-03-18 15:16:21,963 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:16:21,967 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:16:22,045 - __main__ - INFO - Interface created successfully
+2025-03-18 15:16:22,101 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:16:22,108 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:16:22,121 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:16:22,686 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:22:34,345 - __main__ - INFO - Starting application
+2025-03-18 15:22:34,345 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:22:34,350 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:22:34,429 - __main__ - INFO - Interface created successfully
+2025-03-18 15:22:34,487 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:22:34,494 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:22:35,047 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:24:37,384 - __main__ - INFO - Starting application
+2025-03-18 15:24:37,384 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:24:37,389 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:24:37,467 - __main__ - INFO - Interface created successfully
+2025-03-18 15:24:37,523 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:24:37,530 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:24:37,651 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:24:37,839 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:28:01,230 - __main__ - INFO - Starting application
+2025-03-18 15:28:01,230 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:28:01,234 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:28:01,291 - __main__ - ERROR - Error during startup: create_interface.<locals>.<lambda>() missing 3 required positional arguments: 'style', 'tone', and 'creativity'
+Traceback (most recent call last):
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/core.py", line 30, in main
+    interface = create_interface(processor)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/ui/interface.py", line 282, in create_interface
+    gr.JSON(lambda style, tone, creativity: {
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/component_meta.py", line 181, in wrapper
+    return fn(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/components/json_component.py", line 74, in __init__
+    super().__init__(
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/component_meta.py", line 181, in wrapper
+    return fn(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/components/base.py", line 220, in __init__
+    load_fn, initial_value = self.get_load_fn_and_initial_value(value, inputs)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/components/base.py", line 262, in get_load_fn_and_initial_value
+    initial_value = value()
+                    ^^^^^^^
+TypeError: create_interface.<locals>.<lambda>() missing 3 required positional arguments: 'style', 'tone', and 'creativity'
+2025-03-18 15:28:01,923 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:28:44,076 - __main__ - INFO - Starting application
+2025-03-18 15:28:44,076 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:28:44,080 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:28:44,134 - __main__ - ERROR - Error during startup: 'function' object has no attribute '_id'
+Traceback (most recent call last):
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/core.py", line 30, in main
+    interface = create_interface(processor)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/ui/interface.py", line 274, in create_interface
+    align_btn.click(
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/events.py", line 709, in event_trigger
+    return Dependency(block, dep.get_config(), dep_index, fn)
+                             ^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/blocks.py", line 602, in get_config
+    "inputs": [block._id for block in self.inputs],
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/blocks.py", line 602, in <listcomp>
+    "inputs": [block._id for block in self.inputs],
+               ^^^^^^^^^
+AttributeError: 'function' object has no attribute '_id'
+2025-03-18 15:28:44,239 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:28:44,800 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:31:31,197 - __main__ - INFO - Starting application
+2025-03-18 15:31:31,197 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:31:31,202 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:31:31,260 - __main__ - ERROR - Error during startup: 'function' object has no attribute '_id'
+Traceback (most recent call last):
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/core.py", line 30, in main
+    interface = create_interface(processor)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/ui/interface.py", line 274, in create_interface
+    align_btn.click(
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/events.py", line 709, in event_trigger
+    return Dependency(block, dep.get_config(), dep_index, fn)
+                             ^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/blocks.py", line 602, in get_config
+    "inputs": [block._id for block in self.inputs],
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/blocks.py", line 602, in <listcomp>
+    "inputs": [block._id for block in self.inputs],
+               ^^^^^^^^^
+AttributeError: 'function' object has no attribute '_id'
+2025-03-18 15:31:31,304 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:31:31,879 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:33:15,171 - __main__ - INFO - Starting application
+2025-03-18 15:33:15,171 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:33:15,175 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:33:15,228 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:33:15,257 - __main__ - INFO - Interface created successfully
+2025-03-18 15:33:15,311 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:33:15,319 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:33:15,868 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:35:43,096 - __main__ - INFO - Starting application
+2025-03-18 15:35:43,096 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:35:43,103 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:35:43,182 - __main__ - INFO - Interface created successfully
+2025-03-18 15:35:43,237 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:35:43,245 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:35:43,382 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:35:43,769 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:36:05,293 - __main__ - INFO - Starting application
+2025-03-18 15:36:05,294 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:36:05,299 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:36:05,351 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:36:05,381 - __main__ - INFO - Interface created successfully
+2025-03-18 15:36:05,436 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:36:05,444 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:36:06,028 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:37:06,335 - __main__ - INFO - Starting application
+2025-03-18 15:37:06,335 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:37:06,339 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:37:06,390 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:37:06,419 - __main__ - INFO - Interface created successfully
+2025-03-18 15:37:06,474 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:37:06,481 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:37:06,790 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:38:49,112 - __main__ - INFO - Starting application
+2025-03-18 15:38:49,112 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:38:49,117 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:38:49,198 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:38:49,202 - __main__ - INFO - Interface created successfully
+2025-03-18 15:38:49,261 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:38:49,269 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:38:49,565 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:43:15,006 - __main__ - INFO - Starting application
+2025-03-18 15:43:15,006 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:43:15,011 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:43:15,090 - __main__ - INFO - Interface created successfully
+2025-03-18 15:43:15,145 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:43:15,153 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:43:15,489 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:48:43,665 - __main__ - INFO - Starting application
+2025-03-18 15:48:43,665 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:48:43,669 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:48:43,751 - __main__ - INFO - Interface created successfully
+2025-03-18 15:48:43,806 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:48:43,813 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:48:43,973 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:48:44,383 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 15:53:18,541 - __main__ - INFO - Starting application
+2025-03-18 15:53:18,541 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 15:53:18,546 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 15:53:18,625 - __main__ - INFO - Interface created successfully
+2025-03-18 15:53:18,652 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 15:53:18,681 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 15:53:18,688 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 15:53:19,250 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 16:01:01,051 - __main__ - INFO - Starting application
+2025-03-18 16:01:01,051 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 16:01:01,056 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 16:01:01,114 - __main__ - ERROR - Error during startup: create_interface.<locals>.<lambda>() missing 3 required positional arguments: 'style', 'tone', and 'creativity'
+Traceback (most recent call last):
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/core.py", line 30, in main
+    interface = create_interface(processor)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/src/ui/interface.py", line 290, in create_interface
+    gr.JSON(lambda style, tone, creativity: {
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/component_meta.py", line 181, in wrapper
+    return fn(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/components/json_component.py", line 74, in __init__
+    super().__init__(
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/component_meta.py", line 181, in wrapper
+    return fn(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/components/base.py", line 220, in __init__
+    load_fn, initial_value = self.get_load_fn_and_initial_value(value, inputs)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kylinblue/GitHub/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/gradio/components/base.py", line 262, in get_load_fn_and_initial_value
+    initial_value = value()
+                    ^^^^^^^
+TypeError: create_interface.<locals>.<lambda>() missing 3 required positional arguments: 'style', 'tone', and 'creativity'
+2025-03-18 16:01:01,231 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 16:01:01,692 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 16:01:59,862 - __main__ - INFO - Starting application
+2025-03-18 16:01:59,862 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 16:01:59,867 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 16:01:59,945 - __main__ - INFO - Interface created successfully
+2025-03-18 16:02:00,002 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 16:02:00,011 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 16:02:00,575 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 16:07:02,713 - __main__ - INFO - Starting application
+2025-03-18 16:07:02,713 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 16:07:02,720 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 16:07:02,804 - __main__ - INFO - Interface created successfully
+2025-03-18 16:07:02,832 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 16:07:02,865 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 16:07:02,874 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 16:07:03,172 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-18 16:13:39,924 - __main__ - INFO - Starting application
+2025-03-18 16:13:39,924 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-18 16:13:39,929 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-18 16:13:39,975 - httpx - INFO - HTTP Request: GET https://api.gradio.app/gradio-messaging/en "HTTP/1.1 200 OK"
+2025-03-18 16:13:40,009 - __main__ - INFO - Interface created successfully
+2025-03-18 16:13:40,067 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-18 16:13:40,074 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-18 16:13:40,677 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-20 08:23:19,374 - __main__ - INFO - Starting application
+2025-03-20 08:23:19,374 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-20 08:23:19,381 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-20 08:23:19,462 - __main__ - INFO - Interface created successfully
+2025-03-20 08:23:19,522 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-20 08:23:19,529 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-20 08:23:19,791 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-20 08:25:48,084 - __main__ - INFO - Starting application
+2025-03-20 08:25:48,084 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-20 08:25:48,089 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-20 08:25:48,170 - __main__ - INFO - Interface created successfully
+2025-03-20 08:25:48,231 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-20 08:25:48,240 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-20 08:25:48,504 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-20 08:31:17,701 - __main__ - INFO - Starting application
+2025-03-20 08:31:17,701 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-20 08:31:17,705 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-20 08:31:17,780 - __main__ - INFO - Interface created successfully
+2025-03-20 08:31:17,838 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-20 08:31:17,846 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-20 08:31:18,119 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"

@@ -323,8 +323,23 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 return f"Error in processing: {error_message}"
         
         # Main submit button for full pipeline (only when no alignment has been done yet)
+        def conditional_process(alignment_output_text, *args):
+            """Only process what's needed based on current state"""
+            if not alignment_output_text.strip():
+                # If no alignment has been done yet, process both
+                return process_full_pipeline(*args)
+            else:
+                # If alignment is already done, only process main prompt and return None for alignment
+                # to avoid updating the alignment output box
+                main_result = process_main_only(
+                    args[4], args[5], args[6], args[7],
+                    get_params_dict(params["style"].value, params["tone"].value, params["creativity"].value),
+                    alignment_output_text, args[9]
+                )
+                return gr.update(value=alignment_output_text), main_result
+
         submit_btn.click(
-            fn=lambda alignment_output, *args: process_full_pipeline(*args) if not alignment_output.strip() else (alignment_output, process_main_only(args[4], args[5], args[6], args[7], get_params_dict(params["style"].value, params["tone"].value, params["creativity"].value), alignment_output, args[9])),
+            fn=conditional_process,
             inputs=[
                 alignment_output,  # Check if alignment is already done
                 engine_dropdown,

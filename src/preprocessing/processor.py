@@ -111,40 +111,47 @@ class PromptProcessor:
         """Use the alignment engine to optimize the user's prompt based on alignment principles"""
         if not self.alignment_engine:
             return original_prompt
-            
-        # Create a copy of params for the alignment engine
+
+            # Create a copy of params for the alignment engine
         alignment_params = params.copy()
         alignment_params['is_alignment'] = True
-        
+
         system_context = (
-            "You are an AI prompt optimizer. Your job is to rewrite the user's prompt "
-            "to better align with the principles in the alignment context.\n\n"
+            "You are an AI prompt optimizer. Your job is to SUBTLY enhance the user's prompt "
+            "while maintaining its original intent and purpose.\n\n"
             f"Alignment context: {alignment_result}\n\n"
             "Rules for optimization:\n"
-            "1. Preserve the user's original intent and question\n"
-            "2. Add relevant context from the alignment principles\n"
-            "3. Clarify ambiguities in the original prompt\n"
-            "4. Add constraints or guidance based on the alignment context\n"
+            "1. The user's original intent and question MUST be preserved as the primary focus\n"
+            "2. Make only minimal, necessary additions to the prompt\n"
+            "3. You may add BRIEF context from alignment principles only if directly relevant\n"
+            "4. Do not change the core request or question\n"
             "5. DO NOT answer the prompt yourself, just optimize it\n"
             "6. Return ONLY the optimized prompt text, nothing else\n"
+            "7. If the original prompt already aligns well, return it unchanged\n"
         )
-        
+
         full_prompt = f"{system_context}\n\nOriginal prompt: {original_prompt}\n\nOptimized prompt:"
-        
+
         # Get the optimized prompt from the alignment engine
         optimized_prompt = self.alignment_engine.generate(full_prompt, alignment_params)
-        
+
         # Clean up the response
         optimized_prompt = optimized_prompt.strip()
-        
+
         # If optimization failed or returned empty, use the original
         if not optimized_prompt or len(optimized_prompt) < 5:
             print("DEBUG: Prompt optimization failed, using original prompt")
             return original_prompt
-            
+
+            # If the optimized prompt is too different from the original, use the original
+        # This is a simple heuristic to prevent excessive changes
+        if len(optimized_prompt) > len(original_prompt) * 2:
+            print("DEBUG: Optimized prompt too different from original, using original prompt")
+            return original_prompt
+
         print(f"DEBUG: Original prompt: {original_prompt}")
         print(f"DEBUG: Optimized prompt: {optimized_prompt}")
-        
+
         return optimized_prompt
 
     def process_main(self, prompt: str, alignment_result: str, params: Dict[Any, Any]) -> str:
@@ -175,11 +182,12 @@ class PromptProcessor:
         print(f"DEBUG: Using style={style}, tone={tone}, creativity={creativity}")
 
         system_context = (
-            f"Respond in a {style.lower()} style with a {tone.lower()} tone. "
-            f"Use a creativity level of {creativity}.\n\n"
-            f"Consider this alignment context: {alignment_result}\n\n"
-            "The user has reviewed and approved this alignment. "
-            "Please provide a response that takes this alignment into account."
+        #   f"Respond in a {style.lower()} style with a {tone.lower()} tone. "
+        #   f"Use a creativity level of {creativity}.\n\n"
+            f"Consider this alignment context as secondary guidance: {alignment_result}\n\n"
+            "The user's request is your primary objective. The alignment context should "
+            "only influence HOW you respond, not WHAT you respond about. "
+            "Always prioritize addressing the user's specific request."
         )
 
         full_prompt = f"{system_context}\n\nUser: {optimized_prompt}"
