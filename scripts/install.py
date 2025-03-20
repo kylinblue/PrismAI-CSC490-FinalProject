@@ -69,16 +69,31 @@ def install_ollama():
                 print("========================================================")
                 return False
     
-    # Pull the Mistral model
-    print("\nPulling Mistral model (this may take a while)...")
-    try:
-        subprocess.run(["ollama", "pull", "mistral"], check=True)
-        print("Mistral model downloaded successfully!")
-        return True
-    except subprocess.CalledProcessError:
-        print("Failed to pull Mistral model. Please run manually:")
-        print("    ollama pull mistral")
-        return False
+    # Pull required models
+    models_to_pull = [
+        {"name": "mistral", "source": "mistral"},
+        {"name": "llama3.2-3b", "source": "huihui-ai/Llama-3.2-3B-Instruct-abliterated"},
+        {"name": "llama3.1-8b", "source": "meta-llama/Llama-3.1-8B"}
+    ]
+    
+    all_models_success = True
+    
+    for model in models_to_pull:
+        print(f"\nPulling {model['name']} model (this may take a while)...")
+        try:
+            if "huihui-ai" in model["source"] or "meta-llama" in model["source"]:
+                # For Hugging Face models
+                subprocess.run(["ollama", "pull", f"{model['source']}:{model['name']}"], check=True)
+            else:
+                # For standard Ollama models
+                subprocess.run(["ollama", "pull", model["source"]], check=True)
+            print(f"✓ {model['name']} model downloaded successfully!")
+        except subprocess.CalledProcessError:
+            print(f"Failed to pull {model['name']} model. Please run manually:")
+            print(f"    ollama pull {model['source']}")
+            all_models_success = False
+    
+    return all_models_success
 
 def main():
     """Main installation routine."""
@@ -132,6 +147,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-
-if __name__ == "__main__":
-    main()
