@@ -236,46 +236,117 @@ class OllamaEngine(InferenceEngine):
 
 class OpenAIEngine(InferenceEngine):
     """OpenAI API inference engine implementation"""
-    
+
     def __init__(self, model_name: str = "gpt-3.5-turbo"):
         self.model_name = model_name
         self.api_url = "https://api.openai.com/v1/chat/completions"
         self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OPENAI_API_KEY environment variable not set")
-    
+        try:
+            self._check_connection()
+            self._check_model()
+        except Exception as e:
+            print(f"Warning: OpenAI initialization issue: {str(e)}")
+
     @staticmethod
     def get_available_models() -> list:
         """Get list of available OpenAI models"""
-        # These are the standard OpenAI models
         return [
-            "gpt-3.5-turbo", 
-            "gpt-4", 
-            "gpt-4-turbo", 
+            "gpt-3.5-turbo",
+            "gpt-4",
+            "gpt-4-turbo",
             "gpt-4o",
             "gpt-4-vision"
         ]
-    
-    def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
+
+    def _check_connection(self):
+        """Check if the API key is valid and OpenAI is reachable"""
         try:
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json"
             }
-            
             response = requests.post(
                 self.api_url,
                 headers=headers,
                 json={
-                    "model": self.model_name,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "temperature": params.get('creativity', 0.5)
-                }
+                    "model": "gpt-3.5-turbo",
+                    "messages": [{"role": "user", "content": "ping"}],
+                    "temperature": 0
+                },
+                timeout=10
             )
+            if response.status_code not in [200, 400]:
+                raise ConnectionError(f"OpenAI API returned status: {response.status_code}")
+        except Exception as e:
+            raise ConnectionError(f"Cannot connect to OpenAI API: {str(e)}")
+
+    def _check_model(self):
+        """Check if the requested model is among available models"""
+        if self.model_name not in self.get_available_models():
+            print(f"Warning: Model '{self.model_name}' is not in the known OpenAI model list")
+            return False
+        return True
+
+    def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
+        try:
+            if not self._check_model():
+                return f"Error: Model '{self.model_name}' is not available in OpenAI"
+
+            temperature = params.get('creativity', 0.5)
+            try:
+                temperature = float(temperature)
+            except (ValueError, TypeError):
+                temperature = 0.5
+
+            headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+
+            messages = []
+            system_prompt = params.get("system_prompt")
+            if system_prompt:
+                messages.append({"role": "system", "content": system_prompt})
+            messages.append({"role": "user", "content": prompt})
+
+            payload = {
+                "model": self.model_name,
+                "messages": messages,
+                "temperature": temperature,
+                "stream": False
+            }
+
+            print(f"DEBUG: Sending request to OpenAI with payload:\n{json.dumps(payload, indent=2)}")
+
+            response = requests.post(
+                self.api_url,
+                headers=headers,
+                json=payload,
+                timeout=60
+            )
+            print(f"DEBUG: OpenAI response status: {response.status_code}")
             response.raise_for_status()
-            return response.json()['choices'][0]['message']['content']
-        except (KeyError, json.JSONDecodeError, requests.RequestException) as e:
-            return f"Error with OpenAI inference: {str(e)}"
+
+            result = response.json()
+            if 'choices' in result and result['choices']:
+                content = result['choices'][0]['message']['content']
+                print(f"DEBUG: OpenAI response content (truncated): {content[:100]}...")
+                return content
+            else:
+                return "Error: Unexpected response format from OpenAI"
+
+        except requests.HTTPError as e:
+            try:
+                error_detail = e.response.json()
+                return f"OpenAI HTTP error: {error_detail.get('error', {}).get('message', str(e))}"
+            except Exception:
+                return f"HTTP error: {str(e)}"
+        except (KeyError, json.JSONDecodeError) as e:
+            return f"Error parsing OpenAI response: {str(e)}"
+        except requests.RequestException as e:
+            return f"Network error with OpenAI inference: {str(e)}"
 
 
 class ClaudeEngine(InferenceEngine):

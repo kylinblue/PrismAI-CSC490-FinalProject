@@ -246,3 +246,10 @@ TypeError: create_interface.<locals>.<lambda>() missing 3 required positional ar
 2025-03-24 13:32:34,782 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
 2025-03-24 13:32:34,790 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
 2025-03-24 13:32:35,062 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-03-24 14:22:49,101 - __main__ - INFO - Starting application
+2025-03-24 14:22:49,102 - __main__ - INFO - Server configuration: name=None, port=7860
+2025-03-24 14:22:49,108 - __main__ - INFO - PromptProcessor initialized successfully
+2025-03-24 14:22:49,169 - __main__ - INFO - Interface created successfully
+2025-03-24 14:22:49,227 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-03-24 14:22:49,235 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-03-24 14:22:49,572 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
