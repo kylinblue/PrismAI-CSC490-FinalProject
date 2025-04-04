@@ -153,6 +153,24 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 outputs=custom_model_input
             )
 
+        def toggle_api_key_input(engine_type: str):
+            """Show API Key input only if OpenAI is selected"""
+            return gr.update(visible=(engine_type == "openai"))
+
+        with gr.Row():
+            with gr.Column():
+                openai_api_key_input = gr.Textbox(
+                    label="OpenAI API Key",
+                    placeholder="Enter your OpenAI API Key here",
+                    visible=False
+                )
+
+                engine_dropdown.change(
+                    fn=toggle_api_key_input,
+                    inputs=engine_dropdown,
+                    outputs=openai_api_key_input
+                )
+
         with gr.Accordion("Processing Parameters", open=False):
             params = {
                 "style": gr.Radio(
@@ -272,6 +290,14 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 interactive=False
             )
 
+
+        gr.Markdown("""
+        ### How to use:
+        - If using OpenAI, enter your API key when prompted
+        - Choose an engine and model
+        - Adjust parameters and submit your prompt
+        """)
+
         # Add review message
         gr.Markdown("""
         ### How to use:
@@ -291,7 +317,8 @@ def create_interface(processor: PromptProcessor) -> gr.Interface:
                 custom_model_checkbox,
                 custom_model_input,
                 gr.JSON(lambda: get_params_dict(params["style"].value, params["tone"].value, params["creativity"].value)),
-                alignment_input
+                alignment_input,
+                openai_api_key_input
             ],
             outputs=alignment_output
         )
