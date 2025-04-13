@@ -1,4 +1,4 @@
-gradio>=4.0.0
+streamlit>=1.32.0
 transformers
 requests  # for Ollama API
 python-dotenv  # for environment variables
