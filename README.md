@@ -1,4 +1,4 @@
-# LLM Alignment Assistant
+# Prism AI
 
 ## Project Overview
 
@@ -55,13 +55,9 @@ If you prefer to install manually:
 python scripts/install.py
 ```
 
-### Docker Installation (Coming Soon)
-
-Docker support is under development and will be available in a future release.
-
 ## Usage
 
-The application provides a web interface for interacting with language models through various inference engines:
+The application provides a Streamlit-based web interface for interacting with language models through various inference engines:
 
 1. Start the application:
 ```bash
@@ -72,10 +68,10 @@ The application provides a web interface for interacting with language models th
 source .venv/bin/activate
 
 # Then run the application
-python -m src.core
+streamlit run src/app.py
 ```
 
-2. Access the web interface at http://localhost:7860
+2. Access the web interface at http://localhost:8501
 3. Enter your prompt in the input field
 4. Adjust alignment parameters as needed
 5. Submit your request to generate aligned text
@@ -87,16 +83,16 @@ python -m src.core
 
 - **Multiple Engine Support**: Works with Ollama, Claude, and other LLM backends
 - **Style and Tone Control**: Generate text that matches your intended style or tone
-- **User-Friendly Interface**: Simple web interface inspired by [Ollama GUI](https://ollama-gui.vercel.app)
+- **User-Friendly Interface**: Modern Streamlit interface for intuitive interaction
 
 ## Development
 
 ### Project Structure
 
-- `src/core.py`: Core application functionality
+- `src/app.py`: Main Streamlit application
 - `src/inferencing/`: Inference engine implementations
 - `src/preprocessing/`: Prompt processing and alignment logic
-- `src/ui/`: Web interface components
+- `src/components/`: Streamlit UI components
 - `tests/`: Test suite
 
 ### Running Tests
