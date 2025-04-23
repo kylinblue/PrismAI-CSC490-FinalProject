@@ -132,6 +132,12 @@ def create_interface(processor: PromptProcessor):
     with col3:
         align_reset_btn = st.button("Reset", type="secondary")
 
+    # Initialize session state for responses if not already present
+    if 'alignment_response' not in st.session_state:
+        st.session_state.alignment_response = ""
+    if 'final_output' not in st.session_state:
+        st.session_state.final_output = ""
+
     # Alignment output
     if align_btn and alignment_text:
         try:
@@ -145,6 +151,10 @@ def create_interface(processor: PromptProcessor):
             # Process alignment text with selected model
             alignment_response = processor.process_alignment(alignment_text, params)
             st.text_area("Model response to alignment", alignment_response, height=100)
+
+            # Store in session state for the copy functionality
+            st.session_state.alignment_response = alignment_response
+
         except Exception as e:
             st.error(f"Error in alignment: {str(e)}")
 
@@ -199,9 +209,22 @@ def create_interface(processor: PromptProcessor):
                                                       alignment_response if 'alignment_response' in locals() else "",
                                                       params)
                 st.text_area("Model Response", final_output, height=200)
+
+                # Store in session state for the copy functionality
+                st.session_state.final_output = final_output
+
             except Exception as e:
                 st.error(f"Error in processing: {str(e)}")
         else:
             st.warning("Please enter a prompt to process")
+
+    # Add a fallback approach that places a hidden code block with copy button functionality
+    if 'alignment_response' in st.session_state and st.session_state.alignment_response:
+        with st.expander("Copy alignment response", expanded=False):
+            st.code(st.session_state.alignment_response)
+
+    if 'final_output' in st.session_state and st.session_state.final_output:
+        with st.expander("Copy model response", expanded=False):
+            st.code(st.session_state.final_output)
 
     return None  # Streamlit doesn't need to return an interface object
