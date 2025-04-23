@@ -19,7 +19,7 @@ The LLM Alignment Assistant is a wrapper application that helps users align lang
 2. **Important**: If you plan to use local inference, [install Ollama](https://ollama.ai/download) manually first
 3. Run the installation batch file:
 ```bash
-install.bat
+.\install.bat
 ```
 
 #### macOS/Linux
@@ -38,10 +38,6 @@ These scripts will:
 - On Windows: Guide you to install Ollama manually if needed
 - Pull necessary language models
 
-After installation, activate the virtual environment:
-- Windows: `.venv\Scripts\activate`
-- macOS/Linux: `source .venv/bin/activate`
-
 ### Manual Installation
 
 If you prefer to install manually:
@@ -59,23 +55,27 @@ python scripts/install.py
 
 The application provides a Streamlit-based web interface for interacting with language models through various inference engines:
 
-1. Start the application:
-```bash
-# Activate virtual environment first
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
-
-# Then run the application
-streamlit run src/app.py
+### Windows (PowerShell)
+1. Run the application using the Python executable in the virtual environment:
+```powershell
+.venv\Scripts\python -m streamlit run src\core.py
 ```
 
-2. Access the web interface at http://localhost:8501
-3. Enter your prompt in the input field
-4. Adjust alignment parameters as needed
-5. Submit your request to generate aligned text
-6. Review and refine the output as necessary
+### macOS/Linux
+1. Activate the virtual environment:
+```bash
+source .venv/bin/activate
+```
+2. Run the application:
+```bash
+streamlit run src/core.py
+```
+
+3. Access the web interface at http://localhost:8501
+4. Enter your prompt in the input field
+5. Adjust alignment parameters as needed
+6. Submit your request to generate aligned text
+7. Review and refine the output as necessary
 
 **Note**: For local inference, ensure Ollama is running in the background. The application will attempt to connect to Ollama's API at http://localhost:11434.
 
@@ -89,10 +89,10 @@ streamlit run src/app.py
 
 ### Project Structure
 
-- `src/app.py`: Main Streamlit application
-- `src/inferencing/`: Inference engine implementations
+- `src/core.py`: Main application entry point
+- `src/ui/`: Streamlit UI components
 - `src/preprocessing/`: Prompt processing and alignment logic
-- `src/components/`: Streamlit UI components
+- `src/inferencing/`: Inference engine implementations
 - `tests/`: Test suite
 
 ### Running Tests
