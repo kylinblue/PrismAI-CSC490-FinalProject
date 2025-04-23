@@ -6,7 +6,7 @@ import os
 
 class InferenceEngine(ABC):
     """Abstract base class for inference engines"""
-    
+
     @abstractmethod
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         """Generate a response from the model"""
@@ -23,7 +23,7 @@ class InferenceEngine(ABC):
             return OpenAIEngine(model_name)
         else:
             raise ValueError(f"Unsupported engine type: {engine_type}")
-    
+
     @staticmethod
     def get_available_engines() -> list:
         """Return list of available inference engines"""
@@ -31,7 +31,7 @@ class InferenceEngine(ABC):
 
 class OllamaEngine(InferenceEngine):
     """Ollama inference engine implementation"""
-    
+
     def __init__(self, model_name: str = "llama3"):
         self.model_name = model_name
         self.base_url = "http://localhost:11434/api"
@@ -42,7 +42,7 @@ class OllamaEngine(InferenceEngine):
         except Exception as e:
             print(f"Warning: Ollama initialization issue: {str(e)}")
             # Continue anyway - the model might be available later
-    
+
     @staticmethod
     def get_available_models() -> list:
         """Get list of available Ollama models"""
@@ -55,7 +55,7 @@ class OllamaEngine(InferenceEngine):
         except Exception as e:
             print(f"Warning: Cannot fetch Ollama models: {str(e)}")
             return []
-    
+
     def _check_connection(self):
         """Test connection to Ollama server"""
         try:
@@ -71,27 +71,27 @@ class OllamaEngine(InferenceEngine):
             if response.status_code != 200:
                 print(f"Warning: Ollama API returned status {response.status_code}")
                 return False
-                
+
             data = response.json()
             if 'models' not in data:
                 print(f"Warning: Unexpected response format from Ollama API: {data}")
                 return False
-                
+
             available_models = [model['name'] for model in data['models']]
             print(f"DEBUG: Available Ollama models: {available_models}")
-            
+
             # Check if the exact model name exists
             if self.model_name in available_models:
                 print(f"DEBUG: Found exact model match: {self.model_name}")
                 return True
-                
+
             # For models with namespaces (containing slashes) or tags (containing colons)
             # We need to be more flexible in matching
             model_base = self.model_name.split(':')[0]  # Remove tag if present
             model_base = model_base.split('/')[-1]  # Get just the model name without namespace
-            
+
             print(f"DEBUG: Looking for model base: {model_base}")
-            
+
             # Try matching with more flexibility
             for model in available_models:
                 # Check if model name is a prefix of any available model
@@ -99,26 +99,26 @@ class OllamaEngine(InferenceEngine):
                     print(f"Found similar model: {model}, using it instead of {self.model_name}")
                     self.model_name = model
                     return True
-                
+
                 # Check if the base model name matches
                 if model_base and (model_base in model or model.endswith(model_base)):
                     print(f"Found model with matching base name: {model}, using it instead of {self.model_name}")
                     self.model_name = model
                     return True
-                    
+
             print(f"Warning: Model {self.model_name} not found. Available models: {available_models}")
             return False
         except requests.RequestException as e:
             print(f"Warning: Cannot check available models: {str(e)}")
             return False
-    
+
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         """Generate a response from the model"""
         try:
             # Verify model is available before attempting to use it
             if not self._check_model():
                 return f"Error: Model '{self.model_name}' is not available in Ollama"
-            
+
             # Prepare request payload
             # Ensure creativity/temperature is a float value
             creativity = params.get('creativity', 0.5)
@@ -127,17 +127,17 @@ class OllamaEngine(InferenceEngine):
                     creativity = float(creativity)
                 except (ValueError, TypeError):
                     creativity = 0.5
-            
+
             payload = {
                 "model": self.model_name,
                 "prompt": prompt,
                 "temperature": creativity,
                 "stream": False
             }
-            
+
             # Debug information
             print(f"DEBUG: Using Ollama model: {self.model_name}")
-            
+
             # For alignment requests, don't add format
             # For main requests, don't force JSON format as it's causing issues
             if params.get('is_alignment', False):
@@ -145,15 +145,15 @@ class OllamaEngine(InferenceEngine):
                 if 'format' in payload:
                     del payload['format']
             # Don't force JSON format for main requests either
-                
+
             print(f"DEBUG: Request payload: {json.dumps(payload, indent=2)}")
-            
+
             # Add optional parameters only if they exist
             if 'context' in params and params['context']:
                 payload["context"] = params['context']
             if 'system_prompt' in params and params['system_prompt']:
                 payload["system"] = params['system_prompt']
-                
+
             print(f"Sending request to Ollama with model: {self.model_name}")
             try:
                 response = requests.post(
@@ -174,7 +174,7 @@ class OllamaEngine(InferenceEngine):
             if 'response' in result:
                 response_text = result['response']
                 print(f"DEBUG: Extracted response from Ollama: {response_text[:100]}...")
-                
+
                 # Try to parse JSON responses regardless of format parameter
                 try:
                     # Check if the response looks like JSON
@@ -209,7 +209,7 @@ class OllamaEngine(InferenceEngine):
                     print(f"DEBUG: JSON parsing error: {str(e)}")
                     # Not valid JSON, return as is
                     return response_text
-                
+
                 return response_text
             else:
                 print(f"DEBUG: Unexpected Ollama response format: {result}")
@@ -222,7 +222,7 @@ class OllamaEngine(InferenceEngine):
                     error_msg = f"Ollama error: {error_json['error']}"
             except:
                 pass
-                
+
             if e.response.status_code == 404:
                 return error_msg
             elif e.response.status_code == 500:
@@ -305,11 +305,24 @@ class OpenAIEngine(InferenceEngine):
                 "Content-Type": "application/json"
             }
 
-            messages = []
-            system_prompt = params.get("system_prompt")
-            if system_prompt:
-                messages.append({"role": "system", "content": system_prompt})
-            messages.append({"role": "user", "content": prompt})
+            image_data_url = params.get("image_base64")
+
+            if image_data_url:
+                # Vision prompt with image
+                messages = [{
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                        {"type": "image_url", "image_url": {"url": image_data_url}}
+                    ]
+                }]
+            else:
+                # Standard text-only input
+                messages = []
+                system_prompt = params.get("system_prompt")
+                if system_prompt:
+                    messages.append({"role": "system", "content": system_prompt})
+                messages.append({"role": "user", "content": prompt})
 
             payload = {
                 "model": self.model_name,
@@ -351,20 +364,20 @@ class OpenAIEngine(InferenceEngine):
 
 class ClaudeEngine(InferenceEngine):
     """Claude API inference engine implementation"""
-    
+
     def __init__(self, model_name: str = "claude-2"):
         self.model_name = model_name
         self.api_url = "https://api.anthropic.com/v1/messages"
         self.api_key = os.getenv("ANTHROPIC_API_KEY")
         if not self.api_key:
             raise ValueError("ANTHROPIC_API_KEY environment variable not set")
-    
+
     @staticmethod
     def get_available_models() -> list:
         """Get list of available Claude models"""
         # These are the standard Claude models
         return ["claude-2", "claude-instant-1", "claude-3-opus", "claude-3-sonnet", "claude-3-haiku"]
-    
+
     def generate(self, prompt: str, params: Dict[Any, Any]) -> str:
         try:
             headers = {
@@ -372,7 +385,7 @@ class ClaudeEngine(InferenceEngine):
                 "anthropic-version": "2023-06-01",
                 "content-type": "application/json"
             }
-            
+
             response = requests.post(
                 self.api_url,
                 headers=headers,
