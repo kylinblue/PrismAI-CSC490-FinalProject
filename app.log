@@ -52,3 +52,953 @@
 2025-04-13 12:42:51,107 - __main__ - INFO - Starting application
 2025-04-13 12:42:55,235 - __main__ - INFO - PromptProcessor initialized successfully
 2025-04-13 12:42:57,298 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:13,245 - __main__ - INFO - Starting application
+2025-04-22 22:27:13,286 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:13,320 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:24,826 - __main__ - INFO - Starting application
+2025-04-22 22:27:24,834 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:24,848 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:26,578 - __main__ - INFO - Starting application
+2025-04-22 22:27:26,586 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:26,604 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:30,423 - __main__ - INFO - Starting application
+2025-04-22 22:27:30,430 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:30,440 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:34,125 - __main__ - INFO - Starting application
+2025-04-22 22:27:34,135 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:34,146 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:35,488 - __main__ - INFO - Starting application
+2025-04-22 22:27:35,500 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:35,513 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:36,547 - __main__ - INFO - Starting application
+2025-04-22 22:27:36,554 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:36,570 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:37,048 - __main__ - INFO - Starting application
+2025-04-22 22:27:37,058 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:37,069 - __main__ - INFO - Interface created successfully
+2025-04-22 22:27:39,708 - __main__ - INFO - Starting application
+2025-04-22 22:27:39,716 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 22:27:39,732 - __main__ - INFO - Interface created successfully
+2025-04-22 23:02:38,742 - __main__ - INFO - Starting application
+2025-04-22 23:02:38,751 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:02:38,781 - __main__ - INFO - Interface created successfully
+2025-04-22 23:02:41,513 - __main__ - INFO - Starting application
+2025-04-22 23:02:41,523 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:02:41,539 - __main__ - INFO - Interface created successfully
+2025-04-22 23:11:13,248 - __main__ - INFO - Starting application
+2025-04-22 23:11:13,257 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:11:13,287 - __main__ - INFO - Interface created successfully
+2025-04-22 23:11:13,515 - __main__ - INFO - Starting application
+2025-04-22 23:11:13,519 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:11:13,528 - __main__ - INFO - Interface created successfully
+2025-04-22 23:11:39,807 - __main__ - INFO - Starting application
+2025-04-22 23:11:39,820 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:11:39,833 - __main__ - INFO - Interface created successfully
+2025-04-22 23:12:43,945 - __main__ - INFO - Starting application
+2025-04-22 23:12:43,955 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:12:43,968 - __main__ - INFO - Interface created successfully
+2025-04-22 23:12:51,025 - __main__ - INFO - Starting application
+2025-04-22 23:12:51,035 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:12:51,049 - __main__ - INFO - Interface created successfully
+2025-04-22 23:12:58,235 - __main__ - INFO - Starting application
+2025-04-22 23:12:58,240 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:13:06,485 - __main__ - INFO - Interface created successfully
+2025-04-22 23:18:44,087 - __main__ - INFO - Starting application
+2025-04-22 23:18:44,099 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:18:44,129 - __main__ - INFO - Interface created successfully
+2025-04-22 23:18:55,910 - __main__ - INFO - Starting application
+2025-04-22 23:18:55,923 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:18:55,937 - __main__ - INFO - Interface created successfully
+2025-04-22 23:18:58,538 - __main__ - INFO - Starting application
+2025-04-22 23:18:58,545 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:18:58,559 - __main__ - INFO - Interface created successfully
+2025-04-22 23:19:05,202 - __main__ - INFO - Starting application
+2025-04-22 23:19:05,213 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:19:05,230 - __main__ - INFO - Interface created successfully
+2025-04-22 23:19:21,753 - __main__ - INFO - Starting application
+2025-04-22 23:19:21,761 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:19:21,776 - __main__ - INFO - Interface created successfully
+2025-04-22 23:19:21,831 - __main__ - INFO - Starting application
+2025-04-22 23:19:21,836 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:19:56,078 - __main__ - INFO - Interface created successfully
+2025-04-22 23:22:29,577 - __main__ - INFO - Starting application
+2025-04-22 23:22:29,588 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:22:29,618 - __main__ - INFO - Interface created successfully
+2025-04-22 23:22:34,524 - __main__ - INFO - Starting application
+2025-04-22 23:22:34,532 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:22:34,545 - __main__ - INFO - Interface created successfully
+2025-04-22 23:22:47,974 - __main__ - INFO - Starting application
+2025-04-22 23:22:47,987 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:22:48,006 - __main__ - INFO - Interface created successfully
+2025-04-22 23:22:55,320 - __main__ - INFO - Starting application
+2025-04-22 23:22:55,329 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:22:55,346 - __main__ - INFO - Interface created successfully
+2025-04-22 23:22:55,404 - __main__ - INFO - Starting application
+2025-04-22 23:22:55,410 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:23:39,404 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:15,503 - __main__ - INFO - Starting application
+2025-04-22 23:24:15,514 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:15,529 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:17,557 - __main__ - INFO - Starting application
+2025-04-22 23:24:17,564 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:17,577 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:39,272 - __main__ - INFO - Starting application
+2025-04-22 23:24:39,280 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:39,289 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:40,892 - __main__ - INFO - Starting application
+2025-04-22 23:24:40,899 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:40,908 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:44,302 - __main__ - INFO - Starting application
+2025-04-22 23:24:44,316 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:44,783 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:54,823 - __main__ - INFO - Starting application
+2025-04-22 23:24:54,831 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:54,840 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:56,259 - __main__ - INFO - Starting application
+2025-04-22 23:24:56,268 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:56,280 - __main__ - INFO - Interface created successfully
+2025-04-22 23:24:57,418 - __main__ - INFO - Starting application
+2025-04-22 23:24:57,433 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:24:57,874 - __main__ - INFO - Interface created successfully
+2025-04-22 23:25:08,509 - __main__ - INFO - Starting application
+2025-04-22 23:25:08,518 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:25:08,534 - __main__ - INFO - Interface created successfully
+2025-04-22 23:25:11,638 - __main__ - INFO - Starting application
+2025-04-22 23:25:11,645 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:25:11,656 - __main__ - INFO - Interface created successfully
+2025-04-22 23:25:12,603 - __main__ - INFO - Starting application
+2025-04-22 23:25:12,621 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:26:00,678 - __main__ - INFO - Interface created successfully
+2025-04-22 23:26:11,061 - __main__ - INFO - Starting application
+2025-04-22 23:26:11,077 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:26:11,092 - __main__ - INFO - Interface created successfully
+2025-04-22 23:26:28,930 - __main__ - INFO - Starting application
+2025-04-22 23:26:28,939 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:26:28,952 - __main__ - INFO - Interface created successfully
+2025-04-22 23:26:41,301 - __main__ - INFO - Starting application
+2025-04-22 23:26:41,313 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:26:41,326 - __main__ - INFO - Interface created successfully
+2025-04-22 23:26:43,448 - __main__ - INFO - Starting application
+2025-04-22 23:26:43,455 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:27:00,182 - __main__ - INFO - Interface created successfully
+2025-04-22 23:27:24,137 - __main__ - INFO - Starting application
+2025-04-22 23:27:24,152 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:27:24,165 - __main__ - INFO - Interface created successfully
+2025-04-22 23:27:25,582 - __main__ - INFO - Starting application
+2025-04-22 23:27:25,598 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:27:43,205 - __main__ - INFO - Interface created successfully
+2025-04-22 23:37:23,003 - __main__ - INFO - Starting application
+2025-04-22 23:37:23,012 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:37:23,043 - __main__ - INFO - Interface created successfully
+2025-04-22 23:37:24,517 - __main__ - INFO - Starting application
+2025-04-22 23:37:24,528 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:37:24,541 - __main__ - INFO - Interface created successfully
+2025-04-22 23:37:37,432 - __main__ - INFO - Starting application
+2025-04-22 23:37:37,442 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:37:37,459 - __main__ - INFO - Interface created successfully
+2025-04-22 23:37:47,704 - __main__ - INFO - Starting application
+2025-04-22 23:37:47,716 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:37:47,731 - __main__ - INFO - Interface created successfully
+2025-04-22 23:37:47,792 - __main__ - INFO - Starting application
+2025-04-22 23:37:47,797 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-22 23:38:18,524 - __main__ - INFO - Interface created successfully
+2025-04-23 00:00:41,028 - __main__ - INFO - Starting application
+2025-04-23 00:00:41,037 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:00:41,062 - __main__ - ERROR - Error during startup: 'NoneType' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 97, in create_interface
+    "url": url_text.strip() if 'url_text' in locals() else ""
+           ^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strip'
+2025-04-23 00:04:16,748 - __main__ - INFO - Starting application
+2025-04-23 00:04:16,756 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:04:16,786 - __main__ - INFO - Interface created successfully
+2025-04-23 00:04:36,284 - __main__ - INFO - Starting application
+2025-04-23 00:04:36,293 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:04:36,313 - __main__ - INFO - Interface created successfully
+2025-04-23 00:04:43,495 - __main__ - INFO - Starting application
+2025-04-23 00:04:43,506 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:04:43,520 - __main__ - INFO - Interface created successfully
+2025-04-23 00:04:53,506 - __main__ - INFO - Starting application
+2025-04-23 00:04:53,513 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:04:53,534 - __main__ - INFO - Interface created successfully
+2025-04-23 00:04:53,591 - __main__ - INFO - Starting application
+2025-04-23 00:04:53,596 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:05:16,248 - __main__ - INFO - Interface created successfully
+2025-04-23 00:06:38,382 - __main__ - INFO - Starting application
+2025-04-23 00:06:38,394 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:06:38,411 - __main__ - INFO - Interface created successfully
+2025-04-23 00:06:53,719 - __main__ - INFO - Starting application
+2025-04-23 00:06:53,725 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:06:53,741 - __main__ - INFO - Interface created successfully
+2025-04-23 00:07:15,209 - __main__ - INFO - Starting application
+2025-04-23 00:07:15,221 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:07:15,237 - __main__ - INFO - Interface created successfully
+2025-04-23 00:07:17,527 - __main__ - INFO - Starting application
+2025-04-23 00:07:17,539 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:07:17,555 - __main__ - INFO - Interface created successfully
+2025-04-23 00:07:17,600 - __main__ - INFO - Starting application
+2025-04-23 00:07:17,604 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:07:38,141 - __main__ - INFO - Interface created successfully
+2025-04-23 00:08:13,597 - __main__ - INFO - Starting application
+2025-04-23 00:08:13,606 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:08:13,622 - __main__ - INFO - Interface created successfully
+2025-04-23 00:08:17,391 - __main__ - INFO - Starting application
+2025-04-23 00:08:17,402 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:08:17,418 - __main__ - INFO - Interface created successfully
+2025-04-23 00:08:17,489 - __main__ - INFO - Starting application
+2025-04-23 00:08:17,493 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 00:09:01,761 - __main__ - INFO - Interface created successfully
+2025-04-23 15:56:01,709 - __main__ - INFO - Starting application
+2025-04-23 15:56:01,734 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 15:56:01,764 - __main__ - INFO - Interface created successfully
+2025-04-23 15:56:46,694 - __main__ - INFO - Starting application
+2025-04-23 15:56:46,707 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 15:56:46,722 - __main__ - INFO - Interface created successfully
+2025-04-23 15:57:01,791 - __main__ - INFO - Starting application
+2025-04-23 15:57:01,798 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 15:57:01,815 - __main__ - INFO - Interface created successfully
+2025-04-23 15:57:01,883 - __main__ - INFO - Starting application
+2025-04-23 15:57:01,889 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 15:57:36,314 - __main__ - INFO - Interface created successfully
+2025-04-23 15:58:04,881 - __main__ - INFO - Starting application
+2025-04-23 15:58:04,897 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 15:58:04,937 - __main__ - INFO - Interface created successfully
+2025-04-23 15:58:04,947 - __main__ - INFO - Starting application
+2025-04-23 15:58:04,952 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 15:58:52,067 - __main__ - INFO - Interface created successfully
+2025-04-23 16:00:51,694 - __main__ - INFO - Starting application
+2025-04-23 16:00:51,707 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:00:51,722 - __main__ - INFO - Interface created successfully
+2025-04-23 16:00:51,780 - __main__ - INFO - Starting application
+2025-04-23 16:00:51,785 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:01:22,247 - __main__ - INFO - Interface created successfully
+2025-04-23 16:02:24,377 - __main__ - INFO - Starting application
+2025-04-23 16:02:24,389 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:02:24,404 - __main__ - INFO - Interface created successfully
+2025-04-23 16:02:24,448 - __main__ - INFO - Starting application
+2025-04-23 16:02:24,457 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:02:38,032 - __main__ - INFO - Interface created successfully
+2025-04-23 16:02:53,728 - __main__ - INFO - Starting application
+2025-04-23 16:02:53,737 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:02:53,756 - __main__ - INFO - Interface created successfully
+2025-04-23 16:03:02,224 - __main__ - INFO - Starting application
+2025-04-23 16:03:02,234 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:03:02,250 - __main__ - INFO - Interface created successfully
+2025-04-23 16:03:02,642 - __main__ - INFO - Starting application
+2025-04-23 16:03:02,652 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:03:02,669 - __main__ - INFO - Interface created successfully
+2025-04-23 16:03:31,627 - __main__ - INFO - Starting application
+2025-04-23 16:03:31,636 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:03:31,648 - __main__ - INFO - Interface created successfully
+2025-04-23 16:03:31,705 - __main__ - INFO - Starting application
+2025-04-23 16:03:31,709 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:04:10,386 - __main__ - INFO - Interface created successfully
+2025-04-23 16:05:03,075 - __main__ - INFO - Starting application
+2025-04-23 16:05:03,088 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:05:03,105 - __main__ - INFO - Interface created successfully
+2025-04-23 16:05:13,875 - __main__ - INFO - Starting application
+2025-04-23 16:05:13,886 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:05:13,899 - __main__ - INFO - Interface created successfully
+2025-04-23 16:05:13,954 - __main__ - INFO - Starting application
+2025-04-23 16:05:13,958 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:05:33,533 - __main__ - INFO - Interface created successfully
+2025-04-23 16:06:03,694 - __main__ - INFO - Starting application
+2025-04-23 16:06:03,706 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:06:03,721 - __main__ - INFO - Interface created successfully
+2025-04-23 16:06:06,257 - __main__ - INFO - Starting application
+2025-04-23 16:06:06,269 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:06:30,542 - __main__ - INFO - Interface created successfully
+2025-04-23 16:07:09,007 - __main__ - INFO - Starting application
+2025-04-23 16:07:09,017 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:07:09,032 - __main__ - INFO - Interface created successfully
+2025-04-23 16:07:12,307 - __main__ - INFO - Starting application
+2025-04-23 16:07:12,320 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:07:30,662 - __main__ - INFO - Interface created successfully
+2025-04-23 16:11:28,276 - __main__ - INFO - Starting application
+2025-04-23 16:11:28,287 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:11:28,301 - __main__ - INFO - Interface created successfully
+2025-04-23 16:11:29,342 - __main__ - INFO - Starting application
+2025-04-23 16:11:29,354 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:11:58,656 - __main__ - INFO - Interface created successfully
+2025-04-23 16:15:21,454 - __main__ - INFO - Starting application
+2025-04-23 16:15:21,466 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:15:21,482 - __main__ - INFO - Interface created successfully
+2025-04-23 16:15:32,937 - __main__ - INFO - Starting application
+2025-04-23 16:15:32,948 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:15:32,964 - __main__ - INFO - Interface created successfully
+2025-04-23 16:15:34,904 - __main__ - INFO - Starting application
+2025-04-23 16:15:34,909 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:15:58,553 - __main__ - INFO - Interface created successfully
+2025-04-23 16:22:24,517 - __main__ - INFO - Starting application
+2025-04-23 16:22:24,528 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:22:24,559 - __main__ - INFO - Interface created successfully
+2025-04-23 16:22:30,422 - __main__ - INFO - Starting application
+2025-04-23 16:22:30,433 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:22:30,450 - __main__ - INFO - Interface created successfully
+2025-04-23 16:22:49,617 - __main__ - INFO - Starting application
+2025-04-23 16:22:49,626 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:22:49,643 - __main__ - INFO - Interface created successfully
+2025-04-23 16:23:04,001 - __main__ - INFO - Starting application
+2025-04-23 16:23:04,010 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:23:04,027 - __main__ - INFO - Interface created successfully
+2025-04-23 16:23:19,833 - __main__ - INFO - Starting application
+2025-04-23 16:23:19,843 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:23:19,858 - __main__ - INFO - Interface created successfully
+2025-04-23 16:23:19,915 - __main__ - INFO - Starting application
+2025-04-23 16:23:19,920 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:23:52,663 - __main__ - INFO - Interface created successfully
+2025-04-23 16:28:15,254 - __main__ - INFO - Starting application
+2025-04-23 16:28:15,264 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:28:15,295 - __main__ - INFO - Interface created successfully
+2025-04-23 16:28:42,165 - __main__ - INFO - Starting application
+2025-04-23 16:28:42,174 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:28:42,189 - __main__ - INFO - Interface created successfully
+2025-04-23 16:28:44,995 - __main__ - INFO - Starting application
+2025-04-23 16:28:45,001 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:28:45,016 - __main__ - INFO - Interface created successfully
+2025-04-23 16:29:10,533 - __main__ - INFO - Starting application
+2025-04-23 16:29:10,540 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:29:10,555 - __main__ - INFO - Interface created successfully
+2025-04-23 16:29:10,612 - __main__ - INFO - Starting application
+2025-04-23 16:29:10,617 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:29:43,148 - __main__ - INFO - Interface created successfully
+2025-04-23 16:34:00,794 - __main__ - INFO - Starting application
+2025-04-23 16:34:00,804 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:34:00,834 - __main__ - INFO - Interface created successfully
+2025-04-23 16:34:07,799 - __main__ - INFO - Starting application
+2025-04-23 16:34:07,809 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:34:07,825 - __main__ - INFO - Interface created successfully
+2025-04-23 16:34:12,211 - __main__ - INFO - Starting application
+2025-04-23 16:34:12,218 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:34:12,233 - __main__ - INFO - Interface created successfully
+2025-04-23 16:34:29,712 - __main__ - INFO - Starting application
+2025-04-23 16:34:29,724 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:34:29,740 - __main__ - INFO - Interface created successfully
+2025-04-23 16:34:29,809 - __main__ - INFO - Starting application
+2025-04-23 16:34:29,814 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:34:31,974 - __main__ - INFO - Interface created successfully
+2025-04-23 16:38:39,011 - __main__ - INFO - Starting application
+2025-04-23 16:38:39,022 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:38:39,074 - __main__ - INFO - Interface created successfully
+2025-04-23 16:38:46,854 - __main__ - INFO - Starting application
+2025-04-23 16:38:46,865 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:38:46,883 - __main__ - INFO - Interface created successfully
+2025-04-23 16:38:50,383 - __main__ - INFO - Starting application
+2025-04-23 16:38:50,397 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:38:50,414 - __main__ - INFO - Interface created successfully
+2025-04-23 16:38:52,032 - __main__ - INFO - Starting application
+2025-04-23 16:38:52,041 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:38:52,056 - __main__ - INFO - Interface created successfully
+2025-04-23 16:38:54,672 - __main__ - INFO - Starting application
+2025-04-23 16:38:54,680 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:38:54,697 - __main__ - INFO - Interface created successfully
+2025-04-23 16:39:03,849 - __main__ - INFO - Starting application
+2025-04-23 16:39:03,860 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:39:03,877 - __main__ - INFO - Interface created successfully
+2025-04-23 16:39:03,930 - __main__ - INFO - Starting application
+2025-04-23 16:39:03,936 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:39:30,448 - __main__ - INFO - Interface created successfully
+2025-04-23 16:39:55,234 - __main__ - INFO - Starting application
+2025-04-23 16:39:55,247 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:39:55,265 - __main__ - INFO - Interface created successfully
+2025-04-23 16:39:57,116 - __main__ - INFO - Starting application
+2025-04-23 16:39:57,129 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:40:17,318 - __main__ - INFO - Interface created successfully
+2025-04-23 16:40:29,997 - __main__ - INFO - Starting application
+2025-04-23 16:40:30,004 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:40:30,020 - __main__ - INFO - Interface created successfully
+2025-04-23 16:40:32,313 - __main__ - INFO - Starting application
+2025-04-23 16:40:32,322 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:40:51,657 - __main__ - INFO - Interface created successfully
+2025-04-23 16:47:25,327 - __main__ - INFO - Starting application
+2025-04-23 16:47:25,338 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:47:25,370 - __main__ - INFO - Interface created successfully
+2025-04-23 16:47:29,890 - __main__ - INFO - Starting application
+2025-04-23 16:47:29,895 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:47:29,903 - __main__ - INFO - Interface created successfully
+2025-04-23 16:47:32,825 - __main__ - INFO - Starting application
+2025-04-23 16:47:32,835 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:47:32,853 - __main__ - INFO - Interface created successfully
+2025-04-23 16:47:45,575 - __main__ - INFO - Starting application
+2025-04-23 16:47:45,586 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:47:45,602 - __main__ - INFO - Interface created successfully
+2025-04-23 16:47:45,689 - __main__ - INFO - Starting application
+2025-04-23 16:47:45,696 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:48:25,629 - __main__ - INFO - Interface created successfully
+2025-04-23 16:50:52,633 - __main__ - INFO - Starting application
+2025-04-23 16:50:52,642 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:50:52,672 - __main__ - INFO - Interface created successfully
+2025-04-23 16:50:55,293 - __main__ - INFO - Starting application
+2025-04-23 16:50:55,305 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:50:55,320 - __main__ - INFO - Interface created successfully
+2025-04-23 16:51:39,598 - __main__ - INFO - Starting application
+2025-04-23 16:51:39,613 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:51:39,627 - __main__ - INFO - Interface created successfully
+2025-04-23 16:51:47,571 - __main__ - INFO - Starting application
+2025-04-23 16:51:47,582 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:51:47,597 - __main__ - INFO - Interface created successfully
+2025-04-23 16:51:49,022 - __main__ - INFO - Starting application
+2025-04-23 16:51:49,031 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:51:49,048 - __main__ - INFO - Interface created successfully
+2025-04-23 16:51:51,854 - __main__ - INFO - Starting application
+2025-04-23 16:51:51,860 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:53:06,893 - __main__ - INFO - Interface created successfully
+2025-04-23 16:56:47,583 - __main__ - INFO - Starting application
+2025-04-23 16:56:47,593 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:56:47,623 - __main__ - INFO - Interface created successfully
+2025-04-23 16:56:53,085 - __main__ - INFO - Starting application
+2025-04-23 16:56:53,094 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:56:53,110 - __main__ - INFO - Interface created successfully
+2025-04-23 16:56:57,077 - __main__ - INFO - Starting application
+2025-04-23 16:56:57,087 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:56:57,102 - __main__ - INFO - Interface created successfully
+2025-04-23 16:57:09,507 - __main__ - INFO - Starting application
+2025-04-23 16:57:09,518 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:57:09,529 - __main__ - INFO - Interface created successfully
+2025-04-23 16:57:18,418 - __main__ - INFO - Starting application
+2025-04-23 16:57:18,431 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:57:18,447 - __main__ - INFO - Interface created successfully
+2025-04-23 16:57:18,496 - __main__ - INFO - Starting application
+2025-04-23 16:57:18,501 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:57:49,794 - __main__ - INFO - Interface created successfully
+2025-04-23 16:58:50,338 - __main__ - INFO - Starting application
+2025-04-23 16:58:50,347 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:58:50,365 - __main__ - INFO - Interface created successfully
+2025-04-23 16:59:02,433 - __main__ - INFO - Starting application
+2025-04-23 16:59:02,442 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:59:02,459 - __main__ - INFO - Interface created successfully
+2025-04-23 16:59:08,183 - __main__ - INFO - Starting application
+2025-04-23 16:59:08,195 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:59:08,211 - __main__ - INFO - Interface created successfully
+2025-04-23 16:59:11,785 - __main__ - INFO - Starting application
+2025-04-23 16:59:11,794 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:59:11,807 - __main__ - INFO - Interface created successfully
+2025-04-23 16:59:11,850 - __main__ - INFO - Starting application
+2025-04-23 16:59:11,856 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 16:59:37,208 - __main__ - INFO - Interface created successfully
+2025-04-23 17:00:16,747 - __main__ - INFO - Starting application
+2025-04-23 17:00:16,757 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 17:00:16,787 - __main__ - INFO - Interface created successfully
+2025-04-23 17:00:53,102 - __main__ - INFO - Starting application
+2025-04-23 17:00:53,111 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 17:00:53,128 - __main__ - INFO - Interface created successfully
+2025-04-23 17:00:54,238 - __main__ - INFO - Starting application
+2025-04-23 17:00:54,247 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 17:00:54,263 - __main__ - INFO - Interface created successfully
+2025-04-23 17:01:03,155 - __main__ - INFO - Starting application
+2025-04-23 17:01:03,163 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 17:01:03,181 - __main__ - INFO - Interface created successfully
+2025-04-23 17:01:03,235 - __main__ - INFO - Starting application
+2025-04-23 17:01:03,240 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 17:01:28,807 - __main__ - INFO - Interface created successfully
+2025-04-23 18:05:49,544 - __main__ - INFO - Starting application
+2025-04-23 18:05:49,557 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:05:49,590 - __main__ - INFO - Interface created successfully
+2025-04-23 18:06:01,367 - __main__ - INFO - Starting application
+2025-04-23 18:06:01,374 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:06:01,389 - __main__ - INFO - Interface created successfully
+2025-04-23 18:06:12,519 - __main__ - INFO - Starting application
+2025-04-23 18:06:12,529 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:06:12,544 - __main__ - INFO - Interface created successfully
+2025-04-23 18:06:16,571 - __main__ - INFO - Starting application
+2025-04-23 18:06:16,579 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:06:16,592 - __main__ - INFO - Interface created successfully
+2025-04-23 18:06:16,647 - __main__ - INFO - Starting application
+2025-04-23 18:06:16,653 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:06:33,538 - __main__ - INFO - Interface created successfully
+2025-04-23 18:09:05,506 - __main__ - INFO - Starting application
+2025-04-23 18:09:05,516 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:09:05,547 - __main__ - INFO - Interface created successfully
+2025-04-23 18:09:16,302 - __main__ - INFO - Starting application
+2025-04-23 18:09:16,312 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:09:16,329 - __main__ - INFO - Interface created successfully
+2025-04-23 18:09:22,264 - __main__ - INFO - Starting application
+2025-04-23 18:09:22,274 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:09:22,292 - __main__ - INFO - Interface created successfully
+2025-04-23 18:09:26,284 - __main__ - INFO - Starting application
+2025-04-23 18:09:26,292 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:09:26,307 - __main__ - INFO - Interface created successfully
+2025-04-23 18:09:35,997 - __main__ - INFO - Starting application
+2025-04-23 18:09:36,007 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:09:59,010 - __main__ - INFO - Interface created successfully
+2025-04-23 18:13:10,869 - __main__ - INFO - Starting application
+2025-04-23 18:13:10,879 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:13:10,912 - __main__ - INFO - Interface created successfully
+2025-04-23 18:17:32,687 - __main__ - INFO - Starting application
+2025-04-23 18:17:32,696 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:17:32,713 - __main__ - INFO - Interface created successfully
+2025-04-23 18:17:38,106 - __main__ - INFO - Starting application
+2025-04-23 18:17:38,112 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:17:38,127 - __main__ - INFO - Interface created successfully
+2025-04-23 18:21:32,517 - __main__ - INFO - Starting application
+2025-04-23 18:21:32,525 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:21:32,555 - __main__ - INFO - Interface created successfully
+2025-04-23 18:22:06,163 - __main__ - INFO - Starting application
+2025-04-23 18:22:06,174 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:22:06,193 - __main__ - INFO - Interface created successfully
+2025-04-23 18:22:14,483 - __main__ - INFO - Starting application
+2025-04-23 18:22:14,491 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:22:14,507 - __main__ - INFO - Interface created successfully
+2025-04-23 18:22:14,559 - __main__ - INFO - Starting application
+2025-04-23 18:22:14,564 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:22:25,904 - __main__ - INFO - Interface created successfully
+2025-04-23 18:23:27,411 - __main__ - INFO - Starting application
+2025-04-23 18:23:27,422 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:23:27,439 - __main__ - INFO - Interface created successfully
+2025-04-23 18:23:32,031 - __main__ - INFO - Starting application
+2025-04-23 18:23:32,039 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:23:32,056 - __main__ - INFO - Interface created successfully
+2025-04-23 18:23:32,111 - __main__ - INFO - Starting application
+2025-04-23 18:23:32,117 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:23:39,891 - __main__ - INFO - Interface created successfully
+2025-04-23 18:24:00,495 - __main__ - INFO - Starting application
+2025-04-23 18:24:00,504 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:24:00,526 - __main__ - INFO - Interface created successfully
+2025-04-23 18:24:02,179 - __main__ - INFO - Starting application
+2025-04-23 18:24:02,190 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:24:13,494 - __main__ - INFO - Interface created successfully
+2025-04-23 18:25:36,892 - __main__ - INFO - Starting application
+2025-04-23 18:25:36,902 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:25:36,912 - __main__ - ERROR - Error during startup: module 'streamlit' has no attribute 'experimental_rerun'
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 109, in create_interface
+    st.experimental_rerun()
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'streamlit' has no attribute 'experimental_rerun'
+2025-04-23 18:26:05,471 - __main__ - INFO - Starting application
+2025-04-23 18:26:05,482 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:26:05,494 - __main__ - INFO - Interface created successfully
+2025-04-23 18:26:16,677 - __main__ - INFO - Starting application
+2025-04-23 18:26:16,684 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:26:16,699 - __main__ - INFO - Interface created successfully
+2025-04-23 18:26:16,757 - __main__ - INFO - Starting application
+2025-04-23 18:26:16,762 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:26:32,533 - __main__ - INFO - Interface created successfully
+2025-04-23 18:33:58,648 - __main__ - INFO - Starting application
+2025-04-23 18:33:58,656 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:33:58,669 - __main__ - ERROR - Error during startup: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 155, in create_interface
+    toggle_history = st.checkbox("Show History Panel", value=st.session_state.show_history)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 156, in checkbox
+    return self._checkbox(
+           ^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 306, in _checkbox
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+2025-04-23 18:34:06,120 - __main__ - INFO - Starting application
+2025-04-23 18:34:06,128 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:06,146 - __main__ - INFO - Interface created successfully
+2025-04-23 18:34:06,770 - __main__ - INFO - Starting application
+2025-04-23 18:34:06,779 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:06,790 - __main__ - ERROR - Error during startup: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 155, in create_interface
+    toggle_history = st.checkbox("Show History Panel", value=st.session_state.show_history)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 156, in checkbox
+    return self._checkbox(
+           ^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 306, in _checkbox
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+2025-04-23 18:34:07,719 - __main__ - INFO - Starting application
+2025-04-23 18:34:07,730 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:07,758 - __main__ - ERROR - Error during startup: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 278, in create_interface
+    if st.button("Clear History"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 243, in button
+    return self.dg._button(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 1007, in _button
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+2025-04-23 18:34:09,187 - __main__ - INFO - Starting application
+2025-04-23 18:34:09,195 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:09,206 - __main__ - ERROR - Error during startup: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 155, in create_interface
+    toggle_history = st.checkbox("Show History Panel", value=st.session_state.show_history)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 156, in checkbox
+    return self._checkbox(
+           ^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 306, in _checkbox
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+2025-04-23 18:34:09,801 - __main__ - INFO - Starting application
+2025-04-23 18:34:09,813 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:09,829 - __main__ - INFO - Interface created successfully
+2025-04-23 18:34:12,120 - __main__ - INFO - Starting application
+2025-04-23 18:34:12,130 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:12,141 - __main__ - ERROR - Error during startup: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 155, in create_interface
+    toggle_history = st.checkbox("Show History Panel", value=st.session_state.show_history)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 156, in checkbox
+    return self._checkbox(
+           ^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 306, in _checkbox
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+2025-04-23 18:34:14,868 - __main__ - INFO - Starting application
+2025-04-23 18:34:14,878 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:14,889 - __main__ - ERROR - Error during startup: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 155, in create_interface
+    toggle_history = st.checkbox("Show History Panel", value=st.session_state.show_history)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 156, in checkbox
+    return self._checkbox(
+           ^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/checkbox.py", line 306, in _checkbox
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `checkbox` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `checkbox` element.
+2025-04-23 18:34:35,053 - __main__ - INFO - Starting application
+2025-04-23 18:34:35,065 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:34:35,082 - __main__ - ERROR - Error during startup: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 278, in create_interface
+    if st.button("Clear History"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 243, in button
+    return self.dg._button(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 1007, in _button
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+2025-04-23 18:35:06,786 - __main__ - INFO - Starting application
+2025-04-23 18:35:06,794 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:06,804 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:22,605 - __main__ - INFO - Starting application
+2025-04-23 18:35:22,614 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:22,630 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:22,668 - __main__ - INFO - Starting application
+2025-04-23 18:35:22,672 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:22,681 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:24,390 - __main__ - INFO - Starting application
+2025-04-23 18:35:24,402 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:24,421 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:32,783 - __main__ - INFO - Starting application
+2025-04-23 18:35:32,796 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:32,814 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:32,857 - __main__ - INFO - Starting application
+2025-04-23 18:35:32,862 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:42,806 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:59,736 - __main__ - INFO - Starting application
+2025-04-23 18:35:59,747 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:35:59,767 - __main__ - INFO - Interface created successfully
+2025-04-23 18:35:59,811 - __main__ - INFO - Starting application
+2025-04-23 18:35:59,816 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:36:06,943 - __main__ - INFO - Interface created successfully
+2025-04-23 18:40:00,810 - __main__ - INFO - Starting application
+2025-04-23 18:40:00,818 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:40:00,826 - __main__ - ERROR - Error during startup: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 119, in create_interface
+    if st.button("Clear History"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 243, in button
+    return self.dg._button(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 1007, in _button
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+2025-04-23 18:42:31,627 - __main__ - INFO - Starting application
+2025-04-23 18:42:31,635 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:42:31,640 - __main__ - ERROR - Error during startup: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+Traceback (most recent call last):
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/core.py", line 26, in main
+    create_interface(processor)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/src/ui/interface.py", line 119, in create_interface
+    if st.button("Clear History"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 243, in button
+    return self.dg._button(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/widgets/button.py", line 1007, in _button
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 239, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "/Users/jacobdebroder/PycharmProjects/csc490-finalproject-draft/.venv/lib/python3.11/site-packages/streamlit/elements/lib/utils.py", line 145, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `button` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `button` element.
+2025-04-23 18:44:51,829 - __main__ - INFO - Starting application
+2025-04-23 18:44:51,835 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:44:51,849 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:00,528 - __main__ - INFO - Starting application
+2025-04-23 18:45:00,535 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:00,552 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:00,606 - __main__ - INFO - Starting application
+2025-04-23 18:45:00,613 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:08,176 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:14,032 - __main__ - INFO - Starting application
+2025-04-23 18:45:14,045 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:14,063 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:14,116 - __main__ - INFO - Starting application
+2025-04-23 18:45:14,121 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:24,678 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:30,649 - __main__ - INFO - Starting application
+2025-04-23 18:45:30,661 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:30,679 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:30,747 - __main__ - INFO - Starting application
+2025-04-23 18:45:30,755 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:37,554 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:42,447 - __main__ - INFO - Starting application
+2025-04-23 18:45:42,457 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:42,473 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:42,537 - __main__ - INFO - Starting application
+2025-04-23 18:45:42,542 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:48,854 - __main__ - INFO - Interface created successfully
+2025-04-23 18:45:57,429 - __main__ - INFO - Starting application
+2025-04-23 18:45:57,443 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:45:57,461 - __main__ - INFO - Interface created successfully
+2025-04-23 18:46:03,779 - __main__ - INFO - Starting application
+2025-04-23 18:46:03,792 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:46:12,239 - __main__ - INFO - Interface created successfully
+2025-04-23 18:46:44,707 - __main__ - INFO - Starting application
+2025-04-23 18:46:44,717 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:46:44,729 - __main__ - INFO - Interface created successfully
+2025-04-23 18:46:47,246 - __main__ - INFO - Starting application
+2025-04-23 18:46:47,257 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:46:52,457 - __main__ - INFO - Interface created successfully
+2025-04-23 18:46:56,094 - __main__ - INFO - Starting application
+2025-04-23 18:46:56,101 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:46:56,117 - __main__ - INFO - Interface created successfully
+2025-04-23 18:47:05,962 - __main__ - INFO - Starting application
+2025-04-23 18:47:05,975 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:47:17,382 - __main__ - INFO - Interface created successfully
+2025-04-23 18:47:18,398 - __main__ - INFO - Starting application
+2025-04-23 18:47:18,408 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:47:18,425 - __main__ - INFO - Interface created successfully
+2025-04-23 18:51:40,122 - __main__ - INFO - Starting application
+2025-04-23 18:51:40,129 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:51:40,143 - __main__ - INFO - Interface created successfully
+2025-04-23 18:51:51,629 - __main__ - INFO - Starting application
+2025-04-23 18:51:51,641 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:51:51,659 - __main__ - INFO - Interface created successfully
+2025-04-23 18:51:51,707 - __main__ - INFO - Starting application
+2025-04-23 18:51:51,712 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:51:59,937 - __main__ - INFO - Interface created successfully
+2025-04-23 18:52:33,251 - __main__ - INFO - Starting application
+2025-04-23 18:52:33,259 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:52:33,269 - __main__ - INFO - Interface created successfully
+2025-04-23 18:52:38,181 - __main__ - INFO - Starting application
+2025-04-23 18:52:38,190 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:52:38,206 - __main__ - INFO - Interface created successfully
+2025-04-23 18:52:38,263 - __main__ - INFO - Starting application
+2025-04-23 18:52:38,277 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:52:46,979 - __main__ - INFO - Interface created successfully
+2025-04-23 18:56:38,720 - __main__ - INFO - Starting application
+2025-04-23 18:56:38,729 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:56:38,739 - __main__ - INFO - Interface created successfully
+2025-04-23 18:58:30,419 - __main__ - INFO - Starting application
+2025-04-23 18:58:30,426 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:58:30,436 - __main__ - INFO - Interface created successfully
+2025-04-23 18:58:39,932 - __main__ - INFO - Starting application
+2025-04-23 18:58:39,944 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:58:39,959 - __main__ - INFO - Interface created successfully
+2025-04-23 18:58:40,516 - __main__ - INFO - Starting application
+2025-04-23 18:58:40,530 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 18:58:53,865 - __main__ - INFO - Interface created successfully
+2025-04-23 19:00:18,496 - __main__ - INFO - Starting application
+2025-04-23 19:00:18,505 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:00:18,521 - __main__ - INFO - Interface created successfully
+2025-04-23 19:00:18,587 - __main__ - INFO - Starting application
+2025-04-23 19:00:18,592 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:00:25,358 - __main__ - INFO - Interface created successfully
+2025-04-23 19:00:39,833 - __main__ - INFO - Starting application
+2025-04-23 19:00:39,844 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:00:39,860 - __main__ - INFO - Interface created successfully
+2025-04-23 19:00:51,500 - __main__ - INFO - Starting application
+2025-04-23 19:00:51,511 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:01:02,407 - __main__ - INFO - Interface created successfully
+2025-04-23 19:03:07,959 - __main__ - INFO - Starting application
+2025-04-23 19:03:07,970 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:03:08,000 - __main__ - INFO - Interface created successfully
+2025-04-23 19:05:56,086 - __main__ - INFO - Starting application
+2025-04-23 19:05:56,101 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:05:56,118 - __main__ - INFO - Interface created successfully
+2025-04-23 19:05:56,867 - __main__ - INFO - Starting application
+2025-04-23 19:05:56,878 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:05:56,895 - __main__ - INFO - Interface created successfully
+2025-04-23 19:09:45,984 - __main__ - INFO - Starting application
+2025-04-23 19:09:45,990 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:09:45,998 - __main__ - INFO - Interface created successfully
+2025-04-23 19:10:00,118 - __main__ - INFO - Starting application
+2025-04-23 19:10:00,128 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:10:00,146 - __main__ - INFO - Interface created successfully
+2025-04-23 19:10:00,191 - __main__ - INFO - Starting application
+2025-04-23 19:10:00,195 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:10:03,685 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:13,958 - __main__ - INFO - Starting application
+2025-04-23 19:12:13,968 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:12:13,984 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:21,352 - __main__ - INFO - Starting application
+2025-04-23 19:12:21,361 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:12:21,377 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:21,424 - __main__ - INFO - Starting application
+2025-04-23 19:12:21,428 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:12:23,400 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:44,818 - __main__ - INFO - Starting application
+2025-04-23 19:12:44,829 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:12:44,844 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:50,948 - __main__ - INFO - Starting application
+2025-04-23 19:12:50,959 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:12:50,976 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:57,382 - __main__ - INFO - Starting application
+2025-04-23 19:12:57,392 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:12:57,408 - __main__ - INFO - Interface created successfully
+2025-04-23 19:12:58,814 - __main__ - INFO - Starting application
+2025-04-23 19:12:58,825 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:13:01,934 - __main__ - INFO - Interface created successfully
+2025-04-23 19:13:06,683 - __main__ - INFO - Starting application
+2025-04-23 19:13:06,691 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:13:06,707 - __main__ - INFO - Interface created successfully
+2025-04-23 19:13:06,765 - __main__ - INFO - Starting application
+2025-04-23 19:13:06,770 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:13:08,301 - __main__ - INFO - Interface created successfully
+2025-04-23 19:15:21,151 - __main__ - INFO - Starting application
+2025-04-23 19:15:21,159 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:15:21,169 - __main__ - INFO - Interface created successfully
+2025-04-23 19:15:27,900 - __main__ - INFO - Starting application
+2025-04-23 19:15:27,909 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:15:27,928 - __main__ - INFO - Interface created successfully
+2025-04-23 19:15:29,446 - __main__ - INFO - Starting application
+2025-04-23 19:15:29,455 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:15:29,472 - __main__ - INFO - Interface created successfully
+2025-04-23 19:15:30,532 - __main__ - INFO - Starting application
+2025-04-23 19:15:30,542 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:15:30,561 - __main__ - INFO - Interface created successfully
+2025-04-23 19:15:31,330 - __main__ - INFO - Starting application
+2025-04-23 19:15:31,340 - __main__ - INFO - PromptProcessor initialized successfully
+2025-04-23 19:15:31,357 - __main__ - INFO - Interface created successfully
