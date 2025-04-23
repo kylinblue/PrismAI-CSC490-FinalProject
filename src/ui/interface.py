@@ -27,6 +27,7 @@ def create_interface(processor: PromptProcessor):
                     if not models:
                         st.warning("No Ollama models found. Is Ollama running?")
                         return ["(none available - is Ollama running?)"]
+                    return models
                 elif engine_type == "claude":
                     return ClaudeEngine.get_available_models()
                 elif engine_type == "openai":
@@ -131,8 +132,13 @@ def create_interface(processor: PromptProcessor):
     with col3:
         align_reset_btn = st.button("Reset", type="secondary")
 
+    # Initialize session state for responses if not already present
+    if 'alignment_response' not in st.session_state:
+        st.session_state.alignment_response = ""
+    if 'final_output' not in st.session_state:
+        st.session_state.final_output = ""
+
     # Alignment output
-    alignment_response = ""
     if align_btn and alignment_text:
         try:
             # Use custom model name if checkbox is checked
@@ -144,14 +150,10 @@ def create_interface(processor: PromptProcessor):
 
             # Process alignment text with selected model
             alignment_response = processor.process_alignment(alignment_text, params)
-
-            # Display the response in a text area
             st.text_area("Model response to alignment", alignment_response, height=100)
 
-            # Add a code block with the same content for easy copying
-            # st.code automatically adds a copy button
-            with st.expander("Copy alignment response"):
-                st.code(alignment_response, language=None)
+            # Store in session state for the copy functionality
+            st.session_state.alignment_response = alignment_response
 
         except Exception as e:
             st.error(f"Error in alignment: {str(e)}")
@@ -204,20 +206,25 @@ def create_interface(processor: PromptProcessor):
 
                 # Process main prompt with selected model
                 final_output = processor.process_main(prompt,
-                                                      alignment_response,
+                                                      alignment_response if 'alignment_response' in locals() else "",
                                                       params)
-
-                # Display the response in a text area
                 st.text_area("Model Response", final_output, height=200)
 
-                # Add a code block with the same content for easy copying
-                # st.code automatically adds a copy button
-                with st.expander("Copy model response"):
-                    st.code(final_output, language=None)
+                # Store in session state for the copy functionality
+                st.session_state.final_output = final_output
 
             except Exception as e:
                 st.error(f"Error in processing: {str(e)}")
         else:
             st.warning("Please enter a prompt to process")
+
+    # Add a fallback approach that places a hidden code block with copy button functionality
+    if 'alignment_response' in st.session_state and st.session_state.alignment_response:
+        with st.expander("Copy alignment response", expanded=False):
+            st.code(st.session_state.alignment_response)
+
+    if 'final_output' in st.session_state and st.session_state.final_output:
+        with st.expander("Copy model response", expanded=False):
+            st.code(st.session_state.final_output)
 
     return None  # Streamlit doesn't need to return an interface object
