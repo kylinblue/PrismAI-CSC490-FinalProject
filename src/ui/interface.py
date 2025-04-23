@@ -23,6 +23,23 @@ def create_interface(processor: PromptProcessor, url_text=None):
             index=0
         )
 
+        def auto_detect_prompt_type(prompt: str, params: dict):
+            lowered = prompt.lower()
+
+            if "explain like i'm 5" in lowered or "eli5" in lowered:
+                params["style"] = "Casual"
+                params["tone"] = "Positive"
+
+            elif "summarize" in lowered or "overview" in lowered:
+                params["style"] = "Professional"
+                params["tone"] = "Neutral"
+
+            elif "analyze" in lowered or "evaluate" in lowered:
+                params["style"] = "Academic"
+                params["tone"] = "Neutral"
+
+            return params
+
         # Model selection
         def get_models_for_engine(engine_type: str) -> list:
             try:
@@ -197,12 +214,9 @@ def create_interface(processor: PromptProcessor, url_text=None):
     )
 
     # Main prompt input
-    use_url = st.checkbox("Include URL")
+    use_url = False
 
-    url_input = st.text_input(
-        "Optionally include a URL to retrieve text from",
-        disabled=not use_url
-    )
+    url_input = ""
 
     # Function to update character count
     def update_char_count():
@@ -265,6 +279,9 @@ def create_interface(processor: PromptProcessor, url_text=None):
                     except Exception as e:
                         st.warning(f"Could not retrieve text from the URL: {str(e)}")
                         print(f"DEBUG: URL fetch error: {e}")
+
+                params = auto_detect_prompt_type(prompt, params)
+                st.info(f"Auto-detected style: {params['style']} | tone: {params['tone']}")
 
                 # Process main prompt with selected model
                 final_output = processor.process_main(
