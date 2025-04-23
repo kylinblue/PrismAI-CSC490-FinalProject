@@ -27,7 +27,6 @@ def create_interface(processor: PromptProcessor):
                     if not models:
                         st.warning("No Ollama models found. Is Ollama running?")
                         return ["(none available - is Ollama running?)"]
-                    return models
                 elif engine_type == "claude":
                     return ClaudeEngine.get_available_models()
                 elif engine_type == "openai":
@@ -133,6 +132,7 @@ def create_interface(processor: PromptProcessor):
         align_reset_btn = st.button("Reset", type="secondary")
 
     # Alignment output
+    alignment_response = ""
     if align_btn and alignment_text:
         try:
             # Use custom model name if checkbox is checked
@@ -144,7 +144,15 @@ def create_interface(processor: PromptProcessor):
 
             # Process alignment text with selected model
             alignment_response = processor.process_alignment(alignment_text, params)
+
+            # Display the response in a text area
             st.text_area("Model response to alignment", alignment_response, height=100)
+
+            # Add a code block with the same content for easy copying
+            # st.code automatically adds a copy button
+            with st.expander("Copy alignment response"):
+                st.code(alignment_response, language=None)
+
         except Exception as e:
             st.error(f"Error in alignment: {str(e)}")
 
@@ -196,9 +204,17 @@ def create_interface(processor: PromptProcessor):
 
                 # Process main prompt with selected model
                 final_output = processor.process_main(prompt,
-                                                      alignment_response if 'alignment_response' in locals() else "",
+                                                      alignment_response,
                                                       params)
+
+                # Display the response in a text area
                 st.text_area("Model Response", final_output, height=200)
+
+                # Add a code block with the same content for easy copying
+                # st.code automatically adds a copy button
+                with st.expander("Copy model response"):
+                    st.code(final_output, language=None)
+
             except Exception as e:
                 st.error(f"Error in processing: {str(e)}")
         else:
