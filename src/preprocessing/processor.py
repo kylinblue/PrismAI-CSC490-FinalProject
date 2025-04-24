@@ -1,55 +1,5 @@
 from typing import Dict, Any, Tuple
 from src.inferencing.inference import InferenceEngine
-import requests
-from bs4 import BeautifulSoup
-
-
-def html_url_to_text(url: str) -> str:
-    try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, "html.parser")
-
-        # Grab visible paragraphs
-        paragraphs = [p.get_text(strip=True) for p in soup.find_all("p")]
-
-        # Grab table content (especially from Wikipedia)
-        tables = []
-        for table in soup.find_all("table"):
-            for row in table.find_all("tr"):
-                cells = row.find_all(["td", "th"])
-                if cells:
-                    row_text = " | ".join(cell.get_text(strip=True) for cell in cells)
-                    tables.append(row_text)
-
-        combined = paragraphs + tables
-        return "\n".join(combined).strip() or "No readable content found on the page."
-    except Exception as e:
-        raise RuntimeError(f"Failed to fetch or parse URL: {url} — {str(e)}")
-
-
-def preprocess_main_prompt(prompt: str) -> str:
-    """Preprocess the main prompt before sending to the model"""
-    # Basic preprocessing steps:
-    # 1. Trim whitespace
-    processed = prompt.strip()
-
-    # 2. Ensure the prompt ends with a question mark if it seems like a question
-    question_starters = ["what", "how", "why", "when", "where", "who", "which", "can", "could", "would", "should", "is", "are", "do", "does"]
-    words = processed.lower().split()
-    if words and words[0] in question_starters and not processed.endswith("?"):
-        processed += "?"
-
-    # 3. Add a polite prefix if the prompt is very short (likely a command)
-    if len(processed.split()) < 4 and not any(q in processed.lower() for q in question_starters):
-        processed = f"Please {processed.lower()}"
-
-    # 4. Ensure proper capitalization
-    if processed and processed[0].islower():
-        processed = processed[0].upper() + processed[1:]
-
-    return processed
-
 
 class PromptProcessor:
     def __init__(self):
@@ -70,25 +20,6 @@ class PromptProcessor:
     def set_main_engine(self, engine_type: str, model_name: str):
         """Set the main processing engine based on user selection"""
         self.main_engine = InferenceEngine.create_engine(engine_type, model_name)
-
-    def html_url_to_text(self, url: str) -> str:
-        """Fetch HTML content and extract visible text, including from tables."""
-        try:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
-            paragraphs = [p.get_text(strip=True) for p in soup.find_all("p")]
-            tables = []
-            for table in soup.find_all("table"):
-                for row in table.find_all("tr"):
-                    cells = row.find_all(["td", "th"])
-                    if cells:
-                        row_text = " | ".join(cell.get_text(strip=True) for cell in cells)
-                        tables.append(row_text)
-            combined = paragraphs + tables
-            return "\n".join(combined).strip() or "No readable content found on the page."
-        except Exception as e:
-            raise RuntimeError(f"Failed to fetch or parse URL: {url} — {str(e)}")
 
     def process_alignment(self, alignment_text: str, params: Dict[Any, Any]) -> str:
         """Process the alignment text with the Llama model"""
@@ -168,6 +99,28 @@ class PromptProcessor:
 
         return response
 
+    def preprocess_main_prompt(self, prompt: str) -> str:
+        """Preprocess the main prompt before sending to the model"""
+        # Basic preprocessing steps:
+        # 1. Trim whitespace
+        processed = prompt.strip()
+
+        # 2. Ensure the prompt ends with a question mark if it seems like a question
+        question_starters = ["what", "how", "why", "when", "where", "who", "which", "can", "could", "would", "should", "is", "are", "do", "does"]
+        words = processed.lower().split()
+        if words and words[0] in question_starters and not processed.endswith("?"):
+            processed += "?"
+
+        # 3. Add a polite prefix if the prompt is very short (likely a command)
+        if len(processed.split()) < 4 and not any(q in processed.lower() for q in question_starters):
+            processed = f"Please {processed.lower()}"
+
+        # 4. Ensure proper capitalization
+        if processed and processed[0].islower():
+            processed = processed[0].upper() + processed[1:]
+
+        return processed
+
     def optimize_prompt(self, original_prompt: str, alignment_result: str, params: Dict[Any, Any]) -> str:
         """Use the alignment engine to optimize the user's prompt based on alignment principles"""
         if not self.alignment_engine:
@@ -195,7 +148,6 @@ class PromptProcessor:
 
         # Get the optimized prompt from the alignment engine
         optimized_prompt = self.alignment_engine.generate(full_prompt, alignment_params)
-
 
         # Clean up the response
         optimized_prompt = optimized_prompt.strip()
@@ -226,19 +178,10 @@ class PromptProcessor:
         main_params['is_alignment'] = False
 
         # Preprocess the prompt
-        processed_prompt = preprocess_main_prompt(prompt)
+        processed_prompt = self.preprocess_main_prompt(prompt)
 
         # Optimize the prompt using the alignment engine
         optimized_prompt = self.optimize_prompt(processed_prompt, alignment_result, params)
-
-        # Inject webpage content if URL was provided
-        webpage_text = ""
-        if "url" in params and params["url"]:
-            try:
-                webpage_text = html_url_to_text(params["url"])
-                print("DEBUG: Extracted webpage text successfully.")
-            except Exception as e:
-                print(f"DEBUG: Failed to extract webpage text: {e}")
 
         # Extract values from params
         style = str(params.get('style', 'Professional'))
@@ -253,17 +196,15 @@ class PromptProcessor:
         print(f"DEBUG: Using style={style}, tone={tone}, creativity={creativity}")
 
         system_context = (
+        #   f"Respond in a {style.lower()} style with a {tone.lower()} tone. "
+        #   f"Use a creativity level of {creativity}.\n\n"
             f"Consider this alignment context as secondary guidance: {alignment_result}\n\n"
             "The user's request is your primary objective. The alignment context should "
             "only influence HOW you respond, not WHAT you respond about. "
             "Always prioritize addressing the user's specific request."
         )
 
-        # Inject the webpage content if available
-        if webpage_text:
-            system_context += f"\n\n[BEGIN WEBPAGE CONTENT]\n{webpage_text[:3000]}\n[END WEBPAGE CONTENT]"
-
-        full_prompt = f"{system_context}\n\n{optimized_prompt}"
+        full_prompt = f"{system_context}\n\nUser: {optimized_prompt}"
 
         # Generate the response
         response = self.main_engine.generate(full_prompt, main_params)

@@ -2,12 +2,12 @@ import streamlit as st
 import base64
 from src.preprocessing.processor import PromptProcessor
 from src.inferencing.inference import InferenceEngine, OllamaEngine, ClaudeEngine, OpenAIEngine
-from src.preprocessing.processor import html_url_to_text
 
-def create_interface(processor: PromptProcessor, url_text=None):
-    global alignment_response
+
+def create_interface(processor: PromptProcessor):
     st.title("Prism AI")
-    # Initialize history in session state
+
+    # Initialize history in session state if not already present
     if "history" not in st.session_state:
         st.session_state.history = []
 
@@ -21,6 +21,7 @@ def create_interface(processor: PromptProcessor, url_text=None):
             "Select Engine",
             available_engines,
             index=0
+
         )
 
         # Model selection
@@ -91,17 +92,15 @@ def create_interface(processor: PromptProcessor, url_text=None):
             value=0.5,
             step=0.1
         )
-        # Inline History Section in Sidebar
+        # History Section in Sidebar
         st.markdown("### History")
-        if st.button("Clear History"):
+
+        if st.button("Clear History", key="clear_history_sidebar"):
             st.session_state.history = []
 
-        if st.session_state.history:
+        if st.session_state.get("history"):
             for i, entry in enumerate(reversed(st.session_state.history[-10:]), 1):
-                # Truncate the prompt to the first 8–10 words
-                prompt_summary = ' '.join(entry['prompt'].split()[:10]) + (
-                    '...' if len(entry['prompt'].split()) > 10 else '')
-                with st.expander(f"Prompt: {prompt_summary}", expanded=False):
+                with st.expander(f"Prompt: {entry['prompt'][:30]}...", expanded=False):
                     st.markdown(f"**Prompt:**\n{entry['prompt']}")
                     st.markdown(f"**Response:**\n{entry['response']}")
         else:
@@ -112,8 +111,7 @@ def create_interface(processor: PromptProcessor, url_text=None):
             "style": style,
             "tone": tone,
             "creativity": float(creativity),
-            "format": "json",
-            "url": url_text.strip() if url_text else ""
+            "format": "json"
         }
 
     # Main content area
@@ -152,6 +150,12 @@ def create_interface(processor: PromptProcessor, url_text=None):
     with col3:
         align_reset_btn = st.button("Reset", type="secondary")
 
+    # Initialize session state for responses if not already present
+    if 'alignment_response' not in st.session_state:
+        st.session_state.alignment_response = ""
+    if 'final_output' not in st.session_state:
+        st.session_state.final_output = ""
+
     # Alignment output
     if align_btn and alignment_text:
         try:
@@ -165,6 +169,10 @@ def create_interface(processor: PromptProcessor, url_text=None):
             # Process alignment text with selected model
             alignment_response = processor.process_alignment(alignment_text, params)
             st.text_area("Model response to alignment", alignment_response, height=100)
+
+            # Store in session state for the copy functionality
+            st.session_state.alignment_response = alignment_response
+
         except Exception as e:
             st.error(f"Error in alignment: {str(e)}")
 
@@ -197,51 +205,15 @@ def create_interface(processor: PromptProcessor, url_text=None):
     )
 
     # Main prompt input
-    use_url = False
-
-    url_input = ""
-
-    # Function to update character count
-    def update_char_count():
-        st.session_state.char_count = len(st.session_state.main_prompt)
-
-    # Initialize session state keys if not already present
-    if "main_prompt" not in st.session_state:
-        st.session_state.main_prompt = ""
-    if "char_count" not in st.session_state:
-        st.session_state.char_count = 0
-
-    # Prompt input with live character count via on_change
-    st.text_area(
+    prompt = st.text_area(
         "Enter your prompt here",
         placeholder="Enter your prompt...",
-        height=150,
-        key="main_prompt",
-        on_change=update_char_count
+        height=150
     )
-
-    # Show live character count
-    st.caption(f"{st.session_state.char_count} / 2000 characters")
-
-    # Use the latest prompt in your logic
-    prompt = st.session_state.main_prompt
 
     # Process button
     if st.button("Process", type="primary"):
         if prompt:
-            if url_input and any(
-                    word in prompt.lower() for word in ["article", "page", "url", "webpage", "site", "wikipedia"]):
-                try:
-                    from src.preprocessing.processor import html_url_to_text  # <- make sure this is at the top
-
-                    from src.preprocessing.processor import html_url_to_text
-                    url_text = html_url_to_text(url_input)
-                    if url_text and isinstance(url_text, str):
-                        prompt = f"[BEGIN WEBPAGE CONTENT]\n{url_text}\n[END WEBPAGE CONTENT]\n\n{prompt}"
-
-                except Exception as e:
-                    st.warning(f"Could not retrieve text from the URL: {e}")
-
             try:
                 # Use custom model name if checkbox is checked
                 actual_main_model = main_custom_model if main_use_custom_model and main_custom_model else main_model
@@ -250,36 +222,22 @@ def create_interface(processor: PromptProcessor, url_text=None):
                 # Set the main engine based on selected engine and model
                 processor.set_main_engine(main_engine_type, actual_main_model)
 
-                # Check for optional URL input
-                if url_input:
-                    try:
-                        from src.preprocessing.processor import html_url_to_text
-                        ...
-                        url_text = html_url_to_text(url_input)
-                        print(f"DEBUG: Retrieved text from URL:\n{url_text[:500]}")
-                        if url_text and isinstance(url_text, str):
-                            prompt = f"[BEGIN WEBPAGE CONTENT]\n{url_text}\n[END WEBPAGE CONTENT]\n\n{prompt}"
-                    except Exception as e:
-                        st.warning(f"Could not retrieve text from the URL: {str(e)}")
-                        print(f"DEBUG: URL fetch error: {e}")
-
-                # Process main prompt with selected model
                 # Combine alignment and prompt
                 full_prompt = f"{alignment_text.strip()}\n\n{prompt.strip()}" if alignment_text else prompt
 
                 final_output = processor.process_main(
                     full_prompt,
-                    "",  # or keep as alignment_response if you're using it for something else
+                    "",
                     params
                 )
+                st.text_area("Model Response", final_output, height=200)
 
+                # Store in session state for the copy functionality
+                st.session_state.final_output = final_output
                 st.session_state.history.append({
                     "prompt": prompt,
                     "response": final_output
                 })
-
-                st.text_area("Model Response", final_output, height=200)
-
 
 
             except Exception as e:
@@ -287,4 +245,13 @@ def create_interface(processor: PromptProcessor, url_text=None):
         else:
             st.warning("Please enter a prompt to process")
 
-    return None
+    # Add a fallback approach that places a hidden code block with copy button functionality
+    if 'alignment_response' in st.session_state and st.session_state.alignment_response:
+        with st.expander("Copy alignment response", expanded=False):
+            st.code(st.session_state.alignment_response)
+
+    if 'final_output' in st.session_state and st.session_state.final_output:
+        with st.expander("Copy model response", expanded=False):
+            st.code(st.session_state.final_output)
+
+    return None  # Streamlit doesn't need to return an interface object
