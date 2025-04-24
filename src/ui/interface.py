@@ -7,6 +7,10 @@ from src.inferencing.inference import InferenceEngine, OllamaEngine, ClaudeEngin
 def create_interface(processor: PromptProcessor):
     st.title("Prism AI")
 
+    # Initialize history in session state if not already present
+    if "history" not in st.session_state:
+        st.session_state.history = []
+
     # Sidebar for model selection and parameters
     with st.sidebar:
         st.header("Model Configuration")
@@ -17,6 +21,7 @@ def create_interface(processor: PromptProcessor):
             "Select Engine",
             available_engines,
             index=0
+
         )
 
         # Model selection
@@ -87,6 +92,19 @@ def create_interface(processor: PromptProcessor):
             value=0.5,
             step=0.1
         )
+        # History Section in Sidebar
+        st.markdown("### History")
+
+        if st.button("Clear History", key="clear_history_sidebar"):
+            st.session_state.history = []
+
+        if st.session_state.get("history"):
+            for i, entry in enumerate(reversed(st.session_state.history[-10:]), 1):
+                with st.expander(f"Prompt: {entry['prompt'][:30]}...", expanded=False):
+                    st.markdown(f"**Prompt:**\n{entry['prompt']}")
+                    st.markdown(f"**Response:**\n{entry['response']}")
+        else:
+            st.info("No history yet. Process a prompt to see it here.")
 
         # Parameters dictionary
         params = {
@@ -121,7 +139,7 @@ def create_interface(processor: PromptProcessor):
         params["image_base64"] = image_data_url
 
     # Website checkbox
-    website = st.checkbox("Website")
+    # website = st.checkbox("Website")
 
     # Alignment buttons
     col1, col2, col3 = st.columns(3)
@@ -204,14 +222,22 @@ def create_interface(processor: PromptProcessor):
                 # Set the main engine based on selected engine and model
                 processor.set_main_engine(main_engine_type, actual_main_model)
 
-                # Process main prompt with selected model
-                final_output = processor.process_main(prompt,
-                                                      alignment_response if 'alignment_response' in locals() else "",
-                                                      params)
+                # Combine alignment and prompt
+                full_prompt = f"{alignment_text.strip()}\n\n{prompt.strip()}" if alignment_text else prompt
+
+                final_output = processor.process_main(
+                    full_prompt,
+                    "",
+                    params
+                )
                 st.text_area("Model Response", final_output, height=200)
 
                 # Store in session state for the copy functionality
                 st.session_state.final_output = final_output
+                st.session_state.history.append({
+                    "prompt": prompt,
+                    "response": final_output
+                })
 
             except Exception as e:
                 st.error(f"Error in processing: {str(e)}")
