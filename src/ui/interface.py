@@ -5,6 +5,9 @@ from src.inferencing.inference import InferenceEngine, OllamaEngine, ClaudeEngin
 
 
 def create_interface(processor: PromptProcessor):
+    # Set page layout to wide
+    st.set_page_config(layout="wide")
+    
     st.title("Prism AI")
 
     # Initialize history in session state if not already present
@@ -150,135 +153,134 @@ def create_interface(processor: PromptProcessor):
             "format": "json"
         }
 
-    # Main content area
-    st.header("Alignment")
-
-    # Alignment text input
-    alignment_text = st.text_area(
-        "Add your alignment text here",
-        placeholder="Enter text to align the model's behavior...",
-        height=150
-    )
-
-    uploaded_image = st.file_uploader("Or upload an image to help align the model", type=["jpg", "jpeg", "png"])
-
-    def encode_image_to_base64(uploaded_file):
-        if uploaded_file is None:
-            return None
-        image_bytes = uploaded_file.read()
-        encoded = base64.b64encode(image_bytes).decode("utf-8")
-        mime_type = uploaded_file.type or "image/jpeg"
-        return f"data:{mime_type};base64,{encoded}"
-
-    image_data_url = encode_image_to_base64(uploaded_image)
-    if image_data_url:
-        params["image_base64"] = image_data_url
-
-    # Website checkbox
-    # website = st.checkbox("Website")
-
-    # Alignment buttons
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        align_btn = st.button("Align", type="primary")
-    with col2:
-        align_interrupt_btn = st.button("Interrupt", type="secondary")
-    with col3:
-        align_reset_btn = st.button("Reset", type="secondary")
-
     # Initialize session state for responses if not already present
     if 'alignment_response' not in st.session_state:
         st.session_state.alignment_response = ""
     if 'final_output' not in st.session_state:
         st.session_state.final_output = ""
 
-    # Initialize alignment response in session state if not already present
-    if 'alignment_response' not in st.session_state:
-        st.session_state.alignment_response = ""
+    # Main content area - create two columns for side-by-side layout with full width
+    # Use a wider layout with minimal gap to maximize usable space
+    left_col, right_col = st.columns([1, 1], gap="small")
     
-    # Alignment output - always visible
-    st.subheader("Model response to alignment")
-    alignment_output_container = st.container(height=200, border=True)
-    with alignment_output_container:
-        st.markdown(st.session_state.alignment_response)
-    
-    # Process alignment when button is clicked
-    if align_btn and alignment_text:
-        try:
-            # Use custom model name if checkbox is checked
-            actual_model = custom_model if use_custom_model and custom_model else model
-            st.info(f"Using alignment model: {actual_model} with engine: {engine_type}")
+    # Left column - Alignment section
+    with left_col:
+        st.header("Alignment")
 
-            # Set the alignment engine explicitly before processing
-            processor.alignment_engine = InferenceEngine.create_engine(engine_type, actual_model)
+        # Alignment text input
+        alignment_text = st.text_area(
+            "Add your alignment text here",
+            placeholder="Enter text to align the model's behavior...",
+            height=150
+        )
 
-            # Process alignment text with selected model
-            alignment_response = processor.process_alignment(alignment_text, params)
-            
-            # Store in session state for display and copy functionality
-            st.session_state.alignment_response = alignment_response
-            
-            # Force a rerun to update the display
-            st.rerun()
+        uploaded_image = st.file_uploader("Or upload an image to help align the model", type=["jpg", "jpeg", "png"])
 
-        except Exception as e:
-            st.error(f"Error in alignment: {str(e)}")
-            st.session_state.alignment_response = f"**Error:** {str(e)}"
+        def encode_image_to_base64(uploaded_file):
+            if uploaded_file is None:
+                return None
+            image_bytes = uploaded_file.read()
+            encoded = base64.b64encode(image_bytes).decode("utf-8")
+            mime_type = uploaded_file.type or "image/jpeg"
+            return f"data:{mime_type};base64,{encoded}"
 
-    # Main prompt section
-    st.header("Main Prompt")
+        image_data_url = encode_image_to_base64(uploaded_image)
+        if image_data_url:
+            params["image_base64"] = image_data_url
 
-    # Main prompt input
-    prompt = st.text_area(
-        "Enter your prompt here",
-        placeholder="Enter your prompt...",
-        height=150
-    )
-
-    # Initialize final output in session state if not already present
-    if 'final_output' not in st.session_state:
-        st.session_state.final_output = ""
-    
-    # Process button
-    if st.button("Process", type="primary"):
-        if prompt:
+        # Alignment buttons
+        align_col1, align_col2, align_col3 = st.columns(3)
+        with align_col1:
+            align_btn = st.button("Align", type="primary")
+        with align_col2:
+            align_interrupt_btn = st.button("Interrupt", type="secondary")
+        with align_col3:
+            align_reset_btn = st.button("Reset", type="secondary")
+        
+        # Alignment output - always visible
+        st.subheader("Model response to alignment")
+        alignment_output_container = st.container(height=200, border=True)
+        with alignment_output_container:
+            st.markdown(st.session_state.alignment_response)
+        
+        # Process alignment when button is clicked
+        if align_btn and alignment_text:
             try:
                 # Use custom model name if checkbox is checked
-                actual_main_model = main_custom_model if main_use_custom_model and main_custom_model else main_model
-                st.info(f"Using main model: {actual_main_model} with engine: {main_engine_type}")
+                actual_model = custom_model if use_custom_model and custom_model else model
+                st.info(f"Using alignment model: {actual_model} with engine: {engine_type}")
 
-                # Set the main engine based on selected engine and model
-                processor.set_main_engine(main_engine_type, actual_main_model)
+                # Set the alignment engine explicitly before processing
+                processor.alignment_engine = InferenceEngine.create_engine(engine_type, actual_model)
 
-                # Combine alignment and prompt
-                full_prompt = f"{alignment_text.strip()}\n\n{prompt.strip()}" if alignment_text else prompt
-
-                final_output = processor.process_main(
-                    full_prompt,
-                    "",
-                    params
-                )
+                # Process alignment text with selected model
+                alignment_response = processor.process_alignment(alignment_text, params)
                 
-                # Store in session state for the copy functionality
-                st.session_state.final_output = final_output
-                st.session_state.history.append({
-                    "prompt": prompt,
-                    "response": final_output
-                })
+                # Store in session state for display and copy functionality
+                st.session_state.alignment_response = alignment_response
                 
                 # Force a rerun to update the display
                 st.rerun()
 
             except Exception as e:
-                st.error(f"Error in processing: {str(e)}")
-        else:
-            st.warning("Please enter a prompt to process")
+                st.error(f"Error in alignment: {str(e)}")
+                st.session_state.alignment_response = f"**Error:** {str(e)}"
 
-    # Model response output - always visible
-    st.subheader("Model Response")
-    model_output_container = st.container(height=200, border=True)
-    with model_output_container:
-        st.markdown(st.session_state.final_output)
+    # Right column - Main prompt section
+    with right_col:
+        st.header("Main Prompt")
+
+        # Main prompt input
+        prompt = st.text_area(
+            "Enter your prompt here",
+            placeholder="Enter your prompt...",
+            height=150
+        )
+        
+        # Add some spacing to align with the left column's layout
+        st.write("")
+        st.write("")
+
+        # Process button
+        if st.button("Process", type="primary"):
+            if prompt:
+                try:
+                    # Use custom model name if checkbox is checked
+                    actual_main_model = main_custom_model if main_use_custom_model and main_custom_model else main_model
+                    st.info(f"Using main model: {actual_main_model} with engine: {main_engine_type}")
+
+                    # Set the main engine based on selected engine and model
+                    processor.set_main_engine(main_engine_type, actual_main_model)
+
+                    # Combine alignment and prompt
+                    full_prompt = f"{alignment_text.strip()}\n\n{prompt.strip()}" if alignment_text else prompt
+
+                    final_output = processor.process_main(
+                        full_prompt,
+                        "",
+                        params
+                    )
+                    
+                    # Store in session state for the copy functionality
+                    st.session_state.final_output = final_output
+                    st.session_state.history.append({
+                        "prompt": prompt,
+                        "response": final_output
+                    })
+                    
+                    # Force a rerun to update the display
+                    st.rerun()
+
+                except Exception as e:
+                    st.error(f"Error in processing: {str(e)}")
+            else:
+                st.warning("Please enter a prompt to process")
+
+        # Model response output - always visible
+        st.subheader("Model Response")
+        model_output_container = st.container(height=200, border=True)
+        with model_output_container:
+            st.markdown(st.session_state.final_output)
 
     # Add a copy button for alignment response
     if st.session_state.alignment_response:
