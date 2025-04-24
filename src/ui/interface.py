@@ -13,98 +13,134 @@ def create_interface(processor: PromptProcessor):
 
     # Sidebar for model selection and parameters
     with st.sidebar:
-        st.header("Model Configuration")
+        with st.expander("Model Configuration (Alignment)", expanded=False):
+            # Engine selection
+            available_engines = InferenceEngine.get_available_engines()
+            engine_type = st.selectbox(
+                "Select Engine",
+                available_engines,
+                index=0
 
-        # Engine selection
-        available_engines = InferenceEngine.get_available_engines()
-        engine_type = st.selectbox(
-            "Select Engine",
-            available_engines,
-            index=0
-
-        )
-
-        # Model selection
-        def get_models_for_engine(engine_type: str) -> list:
-            try:
-                if engine_type == "ollama":
-                    models = OllamaEngine.get_available_models()
-                    if not models:
-                        st.warning("No Ollama models found. Is Ollama running?")
-                        return ["(none available - is Ollama running?)"]
-                    return models
-                elif engine_type == "claude":
-                    return ClaudeEngine.get_available_models()
-                elif engine_type == "openai":
-                    return OpenAIEngine.get_available_models()
-                else:
-                    return ["(unknown engine)"]
-            except Exception as e:
-                st.error(f"Error getting models for {engine_type}: {str(e)}")
-                return ["(error loading models)"]
-
-        models = get_models_for_engine(engine_type)
-        model = st.selectbox(
-            "Select Model",
-            models,
-            index=0 if models else None
-        )
-
-        # Custom model option
-        use_custom_model = st.checkbox("Use custom model name")
-        custom_model = st.text_input(
-            "Custom model name",
-            disabled=not use_custom_model
-        )
-
-        # OpenAI API Key input (only shown for OpenAI engine)
-        if engine_type == "openai":
-            api_key = st.text_input(
-                "OpenAI API Key",
-                type="password",
-                help="Enter your OpenAI API Key"
             )
-            if api_key:
-                import os
-                os.environ["OPENAI_API_KEY"] = api_key
 
-        st.header("Processing Parameters")
+            # Model selection
+            def get_models_for_engine(engine_type: str) -> list:
+                try:
+                    if engine_type == "ollama":
+                        models = OllamaEngine.get_available_models()
+                        if not models:
+                            st.warning("No Ollama models found. Is Ollama running?")
+                            return ["(none available - is Ollama running?)"]
+                        return models
+                    elif engine_type == "claude":
+                        return ClaudeEngine.get_available_models()
+                    elif engine_type == "openai":
+                        return OpenAIEngine.get_available_models()
+                    else:
+                        return ["(unknown engine)"]
+                except Exception as e:
+                    st.error(f"Error getting models for {engine_type}: {str(e)}")
+                    return ["(error loading models)"]
 
-        # Style selection
-        style = st.radio(
-            "Writing Style",
-            ["Casual", "Professional", "Academic"],
-            index=1
-        )
+            models = get_models_for_engine(engine_type)
+            model = st.selectbox(
+                "Select Model",
+                models,
+                index=0 if models else None
+            )
 
-        # Tone selection
-        tone = st.selectbox(
-            "Tone",
-            ["Neutral", "Positive", "Negative"],
-            index=0
-        )
+            # Custom model option
+            use_custom_model = st.checkbox("Use custom model name")
+            custom_model = st.text_input(
+                "Custom model name",
+                disabled=not use_custom_model
+            )
 
-        # Creativity slider
-        creativity = st.slider(
-            "Creativity Level",
-            min_value=0.0,
-            max_value=1.0,
-            value=0.5,
-            step=0.1
-        )
+            # API Key inputs (only shown for relevant engines)
+            if engine_type == "openai":
+                api_key = st.text_input(
+                    "OpenAI API Key",
+                    type="password",
+                    help="Enter your OpenAI API Key"
+                )
+                if api_key:
+                    import os
+                    os.environ["OPENAI_API_KEY"] = api_key
+            
+            elif engine_type == "claude":
+                claude_api_key = st.text_input(
+                    "Claude API Key",
+                    type="password",
+                    help="Enter your Anthropic Claude API Key"
+                )
+                if claude_api_key:
+                    import os
+                    os.environ["ANTHROPIC_API_KEY"] = claude_api_key
+                    
+            # Style selection
+            style = st.radio(
+                "Writing Style",
+                ["Casual", "Professional", "Academic"],
+                index=1
+            )
+
+            # Tone selection
+            tone = st.selectbox(
+                "Tone",
+                ["Neutral", "Positive", "Negative"],
+                index=0
+            )
+
+            # Creativity slider
+            creativity = st.slider(
+                "Creativity Level",
+                min_value=0.0,
+                max_value=1.0,
+                value=0.5,
+                step=0.1
+            )
+
+        with st.expander("Main Model Configuration", expanded=False):
+            # Main engine selection
+            main_engine_type = st.selectbox(
+                "Main Processing Engine",
+                available_engines,
+                index=0,
+                key="main_engine"
+            )
+
+            # Main model selection
+            main_models = get_models_for_engine(main_engine_type)
+            main_model = st.selectbox(
+                "Main Processing Model",
+                main_models,
+                index=0 if main_models else None,
+                key="main_model"
+            )
+
+            # Main custom model option
+            main_use_custom_model = st.checkbox("Use custom main model name", key="main_custom")
+            main_custom_model = st.text_input(
+                "Custom main model name",
+                disabled=not main_use_custom_model,
+                key="main_custom_input"
+            )
+            
+        with st.expander("Processing Parameters", expanded=False):
+            # Empty section - parameters moved to Model Configuration
+            pass
         # History Section in Sidebar
-        st.markdown("### History")
+        with st.expander("History", expanded=False):
+            if st.button("Clear History", key="clear_history_sidebar"):
+                st.session_state.history = []
 
-        if st.button("Clear History", key="clear_history_sidebar"):
-            st.session_state.history = []
-
-        if st.session_state.get("history"):
-            for i, entry in enumerate(reversed(st.session_state.history[-10:]), 1):
-                with st.expander(f"Prompt: {entry['prompt'][:30]}...", expanded=False):
-                    st.markdown(f"**Prompt:**\n{entry['prompt']}")
-                    st.markdown(f"**Response:**\n{entry['response']}")
-        else:
-            st.info("No history yet. Process a prompt to see it here.")
+            if st.session_state.get("history"):
+                for i, entry in enumerate(reversed(st.session_state.history[-10:]), 1):
+                    with st.expander(f"Prompt: {entry['prompt'][:30]}...", expanded=False):
+                        st.markdown(f"**Prompt:**\n{entry['prompt']}")
+                        st.markdown(f"**Response:**\n{entry['response']}")
+            else:
+                st.info("No history yet. Process a prompt to see it here.")
 
         # Parameters dictionary
         params = {
@@ -156,7 +192,17 @@ def create_interface(processor: PromptProcessor):
     if 'final_output' not in st.session_state:
         st.session_state.final_output = ""
 
-    # Alignment output
+    # Initialize alignment response in session state if not already present
+    if 'alignment_response' not in st.session_state:
+        st.session_state.alignment_response = ""
+    
+    # Alignment output - always visible
+    st.subheader("Model response to alignment")
+    alignment_output_container = st.container(height=200, border=True)
+    with alignment_output_container:
+        st.markdown(st.session_state.alignment_response)
+    
+    # Process alignment when button is clicked
     if align_btn and alignment_text:
         try:
             # Use custom model name if checkbox is checked
@@ -168,41 +214,19 @@ def create_interface(processor: PromptProcessor):
 
             # Process alignment text with selected model
             alignment_response = processor.process_alignment(alignment_text, params)
-            st.text_area("Model response to alignment", alignment_response, height=100)
-
-            # Store in session state for the copy functionality
+            
+            # Store in session state for display and copy functionality
             st.session_state.alignment_response = alignment_response
+            
+            # Force a rerun to update the display
+            st.rerun()
 
         except Exception as e:
             st.error(f"Error in alignment: {str(e)}")
+            st.session_state.alignment_response = f"**Error:** {str(e)}"
 
     # Main prompt section
     st.header("Main Prompt")
-
-    # Main engine selection
-    main_engine_type = st.selectbox(
-        "Main Processing Engine",
-        available_engines,
-        index=0,
-        key="main_engine"
-    )
-
-    # Main model selection
-    main_models = get_models_for_engine(main_engine_type)
-    main_model = st.selectbox(
-        "Main Processing Model",
-        main_models,
-        index=0 if main_models else None,
-        key="main_model"
-    )
-
-    # Main custom model option
-    main_use_custom_model = st.checkbox("Use custom main model name", key="main_custom")
-    main_custom_model = st.text_input(
-        "Custom main model name",
-        disabled=not main_use_custom_model,
-        key="main_custom_input"
-    )
 
     # Main prompt input
     prompt = st.text_area(
@@ -211,6 +235,10 @@ def create_interface(processor: PromptProcessor):
         height=150
     )
 
+    # Initialize final output in session state if not already present
+    if 'final_output' not in st.session_state:
+        st.session_state.final_output = ""
+    
     # Process button
     if st.button("Process", type="primary"):
         if prompt:
@@ -230,22 +258,30 @@ def create_interface(processor: PromptProcessor):
                     "",
                     params
                 )
-                st.text_area("Model Response", final_output, height=200)
-
+                
                 # Store in session state for the copy functionality
                 st.session_state.final_output = final_output
                 st.session_state.history.append({
                     "prompt": prompt,
                     "response": final_output
                 })
+                
+                # Force a rerun to update the display
+                st.rerun()
 
             except Exception as e:
                 st.error(f"Error in processing: {str(e)}")
         else:
             st.warning("Please enter a prompt to process")
 
-    # Add a fallback approach that places a hidden code block with copy button functionality
-    if 'alignment_response' in st.session_state and st.session_state.alignment_response:
+    # Model response output - always visible
+    st.subheader("Model Response")
+    model_output_container = st.container(height=200, border=True)
+    with model_output_container:
+        st.markdown(st.session_state.final_output)
+
+    # Add a copy button for alignment response
+    if st.session_state.alignment_response:
         with st.expander("Copy alignment response", expanded=False):
             st.code(st.session_state.alignment_response)
 
