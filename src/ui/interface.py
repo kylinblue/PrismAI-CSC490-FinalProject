@@ -23,23 +23,6 @@ def create_interface(processor: PromptProcessor, url_text=None):
             index=0
         )
 
-        def auto_detect_prompt_type(prompt: str, params: dict):
-            lowered = prompt.lower()
-
-            if "explain like i'm 5" in lowered or "eli5" in lowered:
-                params["style"] = "Casual"
-                params["tone"] = "Positive"
-
-            elif "summarize" in lowered or "overview" in lowered:
-                params["style"] = "Professional"
-                params["tone"] = "Neutral"
-
-            elif "analyze" in lowered or "evaluate" in lowered:
-                params["style"] = "Academic"
-                params["tone"] = "Neutral"
-
-            return params
-
         # Model selection
         def get_models_for_engine(engine_type: str) -> list:
             try:
@@ -158,7 +141,7 @@ def create_interface(processor: PromptProcessor, url_text=None):
         params["image_base64"] = image_data_url
 
     # Website checkbox
-    website = st.checkbox("Website")
+    # website = st.checkbox("Website")
 
     # Alignment buttons
     col1, col2, col3 = st.columns(3)
@@ -280,13 +263,13 @@ def create_interface(processor: PromptProcessor, url_text=None):
                         st.warning(f"Could not retrieve text from the URL: {str(e)}")
                         print(f"DEBUG: URL fetch error: {e}")
 
-                params = auto_detect_prompt_type(prompt, params)
-                st.info(f"Auto-detected style: {params['style']} | tone: {params['tone']}")
-
                 # Process main prompt with selected model
+                # Combine alignment and prompt
+                full_prompt = f"{alignment_text.strip()}\n\n{prompt.strip()}" if alignment_text else prompt
+
                 final_output = processor.process_main(
-                    prompt,
-                    alignment_response if 'alignment_response' in locals() else "",
+                    full_prompt,
+                    "",  # or keep as alignment_response if you're using it for something else
                     params
                 )
 
