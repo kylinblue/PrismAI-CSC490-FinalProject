@@ -239,7 +239,6 @@ def create_interface(processor: PromptProcessor):
                     "response": final_output
                 })
 
-
             except Exception as e:
                 st.error(f"Error in processing: {str(e)}")
         else:
