@@ -305,6 +305,14 @@ def create_interface(processor: PromptProcessor):
         else:
             # Clear image data if uploader is cleared
             st.session_state.current_alignment_image_url = None
+            
+        # URL input for content extraction
+        alignment_url = st.text_input(
+            "Or enter URL for content extraction",
+            placeholder="https://example.com/article",
+            help="Enter a URL to extract content for alignment. The main article content will be extracted automatically. For best results, install trafilatura package.",
+            key="ti_align_url"
+        )
 
         # Alignment action buttons
         align_btn_col, reset_btn_col = st.columns(2)
@@ -314,6 +322,8 @@ def create_interface(processor: PromptProcessor):
             if st.button("Reset Alignment Input", key="btn_reset_align"):
                  st.session_state.current_alignment_text = ""
                  st.session_state.current_alignment_image_url = None
+                 # Also clear the URL input field
+                 st.session_state["ti_align_url"] = ""
                  # Clear the file uploader state requires a rerun trick or specific component handling
                  # For now, just clear the text and stored data. User needs to manually clear uploader.
                  st.session_state.alignment_response_complete = "" # Also clear previous output
@@ -331,18 +341,29 @@ def create_interface(processor: PromptProcessor):
 
         # --- Alignment Processing Logic ---
         if align_button_pressed:
-            # Ensure either text or image is provided
-            if not alignment_text and not st.session_state.current_alignment_image_url:
-                st.warning("Please provide alignment text or upload an image.")
+            # Ensure either text, image, or URL is provided
+            if not alignment_text and not st.session_state.current_alignment_image_url and not alignment_url:
+                st.warning("Please provide alignment text, upload an image, or enter a URL.")
             else:
                 # Construct params for alignment
                 alignment_params = {
                     "style": style, # Use sidebar params
                     "tone": tone,
                     "creativity": float(creativity),
-                    "image_base64": st.session_state.current_alignment_image_url
+                    "image_base64": st.session_state.current_alignment_image_url,
+                    "alignment_url": alignment_url # Pass the URL for extraction
                     # 'format' is usually not needed/handled by alignment prompt
                 }
+                
+                # If URL is provided, show a warning about trafilatura if needed
+                if alignment_url:
+                    try:
+                        import trafilatura
+                    except ImportError:
+                        st.warning("The trafilatura package is not installed. A basic fallback extraction method will be used. For better results, install trafilatura with: pip install trafilatura")
+                    
+                    # Show a loading indicator when extracting from URL
+                    st.info(f"Extracting content from {alignment_url}...")
 
                 # Get selected alignment engine/model
                 align_engine = st.session_state.alignment_engine_type

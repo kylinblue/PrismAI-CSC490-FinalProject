@@ -2,3 +2,4 @@ streamlit>=1.32.0
 requests  # for Ollama API
 python-dotenv  # for environment variables
 pytest  # for testing
+trafilatura>=1.6.0  # for web content extraction

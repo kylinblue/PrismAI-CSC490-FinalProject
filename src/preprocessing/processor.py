@@ -2,6 +2,16 @@ from typing import Dict, Any, Tuple, Generator, Union
 from src.inferencing.inference import InferenceEngine, OllamaEngine
 import logging
 import json
+import requests
+from urllib.parse import urlparse
+
+# Try to import trafilatura, but provide fallback if not available
+try:
+    import trafilatura
+    TRAFILATURA_AVAILABLE = True
+except ImportError:
+    TRAFILATURA_AVAILABLE = False
+    logging.getLogger(__name__).warning("trafilatura module not found. URL extraction will use basic fallback method.")
 
 logger = logging.getLogger(__name__)
 
@@ -76,6 +86,25 @@ class PromptProcessor:
         if not self.alignment_engine:
             def error_gen(): yield "Error: No alignment engine available"
             return error_gen()
+            
+        # Check for URL in params and extract content if present
+        url = params.get("alignment_url", "")
+        if url and url.strip():
+            logger.info(f"Extracting content from URL: {url}")
+            extracted_content = self.extract_content_from_url(url)
+            
+            # If extraction returned an error message
+            if extracted_content.startswith("Error:"):
+                def error_gen(): yield extracted_content
+                return error_gen()
+                
+            # If we have both URL content and user-provided text, combine them
+            if alignment_text and alignment_text.strip():
+                alignment_text = f"{alignment_text}\n\n--- Content extracted from {url} ---\n\n{extracted_content}"
+            else:
+                alignment_text = extracted_content
+                
+            logger.info(f"Using extracted content from URL ({len(extracted_content)} chars)")
 
         # Handle image prompt separately
         if "image_base64" in params and params["image_base64"]:
@@ -89,7 +118,7 @@ class PromptProcessor:
             full_prompt = f"{system_context}\n\nText (optional context): {alignment_text}"
             logger.info("Processing image alignment...")
         elif not alignment_text or not alignment_text.strip():
-             def error_gen(): yield "Please provide alignment text or an image to analyze"
+             def error_gen(): yield "Please provide alignment text, an image, or a URL to analyze"
              return error_gen()
         else:
             # Standard text alignment
@@ -129,6 +158,112 @@ class PromptProcessor:
     # --- optimize_prompt remains non-streaming ---
     # It needs the full alignment result to work with.
     # It calls generate(stream=False) internally.
+
+    def extract_content_from_url(self, url: str) -> str:
+        """Extract main article content from a URL using Trafilatura or fallback method"""
+        if not url or not url.strip():
+            return ""
+            
+        # Basic URL validation
+        try:
+            parsed_url = urlparse(url)
+            if not parsed_url.scheme or not parsed_url.netloc:
+                logger.warning(f"Invalid URL format: {url}")
+                return f"Error: Invalid URL format. Please provide a complete URL including http:// or https://"
+        except Exception as e:
+            logger.error(f"URL parsing error: {e}")
+            return f"Error: Could not parse URL: {str(e)}"
+        
+        # Check if trafilatura is available
+        if not TRAFILATURA_AVAILABLE:
+            return self._extract_content_fallback(url)
+            
+        try:
+            logger.info(f"Fetching content from URL using Trafilatura: {url}")
+            # Download the webpage content
+            downloaded = trafilatura.fetch_url(url)
+            if not downloaded:
+                logger.warning(f"Failed to download content from URL: {url}")
+                return f"Error: Could not download content from {url}"
+                
+            # Extract the main content
+            extracted_text = trafilatura.extract(downloaded, include_links=False, 
+                                               include_images=False, 
+                                               include_tables=False,
+                                               output_format='text')
+            
+            if not extracted_text or not extracted_text.strip():
+                logger.warning(f"No content extracted from URL: {url}")
+                # Try fallback method
+                return self._extract_content_fallback(url)
+                
+            # Trim and clean up the extracted text
+            cleaned_text = extracted_text.strip()
+            
+            # Limit length if extremely long
+            max_length = 8000  # Reasonable limit to avoid token issues
+            if len(cleaned_text) > max_length:
+                logger.info(f"Truncating extracted content from {len(cleaned_text)} to {max_length} chars")
+                cleaned_text = cleaned_text[:max_length] + "...\n[Content truncated due to length]"
+                
+            logger.info(f"Successfully extracted {len(cleaned_text)} chars from URL")
+            return cleaned_text
+            
+        except Exception as e:
+            logger.exception(f"Error extracting content from URL with Trafilatura: {e}")
+            # Try fallback method
+            return self._extract_content_fallback(url)
+            
+    def _extract_content_fallback(self, url: str) -> str:
+        """Basic fallback method for extracting content when Trafilatura is not available"""
+        try:
+            logger.info(f"Using fallback extraction method for URL: {url}")
+            
+            # Simple request to get the page content
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            # Get the HTML content
+            html_content = response.text
+            
+            # Very basic extraction - get text between <p> tags
+            import re
+            paragraphs = re.findall(r'<p[^>]*>(.*?)</p>', html_content, re.DOTALL)
+            
+            # Clean up the paragraphs (remove HTML tags)
+            cleaned_paragraphs = []
+            for p in paragraphs:
+                # Remove HTML tags
+                clean_p = re.sub(r'<[^>]+>', '', p)
+                # Remove extra whitespace
+                clean_p = re.sub(r'\s+', ' ', clean_p).strip()
+                if clean_p and len(clean_p) > 20:  # Only keep paragraphs with substantial content
+                    cleaned_paragraphs.append(clean_p)
+            
+            # Join the paragraphs
+            extracted_text = '\n\n'.join(cleaned_paragraphs)
+            
+            if not extracted_text or not extracted_text.strip():
+                logger.warning(f"No content extracted from URL with fallback method: {url}")
+                return f"Error: Could not extract content from {url}. Please install trafilatura for better extraction."
+            
+            # Limit length if extremely long
+            max_length = 8000
+            if len(extracted_text) > max_length:
+                logger.info(f"Truncating extracted content from {len(extracted_text)} to {max_length} chars")
+                extracted_text = extracted_text[:max_length] + "...\n[Content truncated due to length]"
+            
+            logger.info(f"Successfully extracted {len(extracted_text)} chars from URL using fallback method")
+            
+            # Add a note about using fallback method
+            return extracted_text + "\n\n[Note: Content extracted using basic method. Install trafilatura for better results.]"
+            
+        except Exception as e:
+            logger.exception(f"Error in fallback extraction method: {e}")
+            return f"Error: Failed to extract content: {str(e)}. Please install trafilatura for better extraction."
 
     def preprocess_main_prompt(self, prompt: str) -> str:
         """Preprocess the main prompt before sending to the model"""
