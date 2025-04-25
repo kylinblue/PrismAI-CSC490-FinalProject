@@ -116,23 +116,24 @@ class OllamaEngine(InferenceEngine):
                         logger.info(f"Found model matching base name: {model}. Using it instead of {self.model_name}")
                         self.model_name = model # Update to the full name found on the server
                         return True
+            
+            # Try to find a model with the same base name but with a tag
+            # This handles cases like 'llama3' when 'llama3:latest' is available
+            for model in available_models:
+                model_base = model.split(':')[0]
+                if model_base == self.model_name:
+                    logger.info(f"Found model with tag: {model}. Using it instead of {self.model_name}")
+                    self.model_name = model
+                    return True
 
-            # More flexible matching (less reliable, kept as last resort)
-            # model_base = self.model_name.split(':')[0]
-            # model_base = model_base.split('/')[-1]
-            # logger.debug(f"Looking for model base: {model_base}")
-
-            # for model in available_models:
-            #     # Check if model name is a prefix of any available model
-            #     if model.startswith(self.model_name) or self.model_name in model:
-            #         logger.info(f"Found similar model: {model}, using it instead of {self.model_name}")
-            #         self.model_name = model
-            #         return True
-            #     # Check if the base model name matches
-            #     if model_base and (model_base in model or model.endswith(model_base)):
-            #         logger.info(f"Found model with matching base name: {model}, using it instead of {self.model_name}")
-            #         self.model_name = model
-            #         return True
+            # More flexible matching for common model name variations
+            if self.model_name == "llama3":
+                # Special case for llama3 which might be available with different naming patterns
+                for model in available_models:
+                    if "llama3" in model.lower():
+                        logger.info(f"Found llama3 variant: {model}. Using it instead of {self.model_name}")
+                        self.model_name = model
+                        return True
 
             logger.warning(f"Model {self.model_name} not found or could not be matched. Available models: {available_models}")
             return False
@@ -192,6 +193,8 @@ class OllamaEngine(InferenceEngine):
                 payload["context"] = params['context']
             if params.get('system_prompt'):
                 payload["system"] = params['system_prompt']
+                # Log system prompt for debugging
+                logger.debug(f"Using system prompt: {params['system_prompt'][:200]}...")
 
             logger.info(f"Sending request to Ollama (model: {self.model_name}, stream: {stream})")
             response = requests.post(
@@ -440,19 +443,25 @@ class OpenAIEngine(InferenceEngine):
 
             if image_data_url:
                 # Vision prompt with image
-                messages = [{
+                messages = []
+                system_prompt = params.get("system_prompt")
+                if system_prompt:
+                    messages.append({"role": "system", "content": system_prompt})
+                messages.append({
                     "role": "user",
                     "content": [
                         {"type": "text", "text": prompt},
                         {"type": "image_url", "image_url": {"url": image_data_url}}
                     ]
-                }]
+                })
             else:
                 # Standard text-only input
                 messages = []
                 system_prompt = params.get("system_prompt")
                 if system_prompt:
                     messages.append({"role": "system", "content": system_prompt})
+                    # Log that we're using a system prompt
+                    logger.debug(f"Added system prompt to OpenAI request: {len(system_prompt)} chars")
                 messages.append({"role": "user", "content": prompt})
 
             payload = {
@@ -597,6 +606,8 @@ class ClaudeEngine(InferenceEngine):
             system_prompt = params.get("system_prompt")
             if system_prompt:
                  messages.append({"role": "system", "content": system_prompt}) # Claude uses 'system' role differently
+                 # Log that we're using a system prompt
+                 logger.debug(f"Added system prompt to Claude request: {len(system_prompt)} chars")
 
             user_content = []
             user_content.append({"type": "text", "text": prompt})

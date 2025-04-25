@@ -1,5 +1,5 @@
 from typing import Dict, Any, Tuple, Generator, Union
-from src.inferencing.inference import InferenceEngine
+from src.inferencing.inference import InferenceEngine, OllamaEngine
 import logging
 import json
 
@@ -9,8 +9,22 @@ class PromptProcessor:
     def __init__(self):
         """Initialize with two inference engines - one for alignment and one for main processing"""
         try:
-            # Use a standard Ollama model name (llama3 is the correct format)
-            self.alignment_engine = InferenceEngine.create_engine("ollama", "llama3")
+            # Try to get available Ollama models first
+            available_models = []
+            try:
+                available_models = OllamaEngine.get_available_models()
+            except Exception as e:
+                logger.warning(f"Could not get available Ollama models: {str(e)}")
+            
+            # Use llama3:latest if available, otherwise try the first available model
+            if "llama3:latest" in available_models:
+                self.alignment_engine = InferenceEngine.create_engine("ollama", "llama3:latest")
+            elif available_models:
+                logger.info(f"Using first available Ollama model: {available_models[0]}")
+                self.alignment_engine = InferenceEngine.create_engine("ollama", available_models[0])
+            else:
+                # Default to llama3 if we couldn't get the model list
+                self.alignment_engine = InferenceEngine.create_engine("ollama", "llama3")
         except ConnectionError:
             # Fallback to OpenAI if Ollama is not available
             try:
@@ -19,9 +33,23 @@ class PromptProcessor:
                 logger.warning(f"Could not initialize any alignment engine: {str(e)}")
                 # No fallback available, will need to be set later
                 self.alignment_engine = None # UI should handle this case
+        
         try:
              # Initialize main_engine with a default as well, can be overridden
-             self.main_engine = InferenceEngine.create_engine("ollama", "llama3")
+             # Use the same logic as for alignment engine
+             available_models = []
+             try:
+                 available_models = OllamaEngine.get_available_models()
+             except Exception as e:
+                 logger.warning(f"Could not get available Ollama models: {str(e)}")
+             
+             if "llama3:latest" in available_models:
+                 self.main_engine = InferenceEngine.create_engine("ollama", "llama3:latest")
+             elif available_models:
+                 logger.info(f"Using first available Ollama model: {available_models[0]}")
+                 self.main_engine = InferenceEngine.create_engine("ollama", available_models[0])
+             else:
+                 self.main_engine = InferenceEngine.create_engine("ollama", "llama3")
         except ConnectionError:
              try:
                  self.main_engine = InferenceEngine.create_engine("openai", "gpt-3.5-turbo")
@@ -126,9 +154,12 @@ class PromptProcessor:
 
     def optimize_prompt(self, original_prompt: str, alignment_result: str, params: Dict[Any, Any]) -> str:
         """Use the alignment engine to optimize the user's prompt based on alignment principles"""
-        """Use the alignment engine to optimize the user's prompt based on alignment principles"""
-        if not self.alignment_engine or not alignment_result or not alignment_result.strip():
-            logger.debug("Skipping prompt optimization (no engine or alignment result).")
+        # Check if alignment result contains an error message
+        if not self.alignment_engine or not alignment_result or not alignment_result.strip() or alignment_result.startswith("Error:"):
+            if alignment_result and alignment_result.startswith("Error:"):
+                logger.warning(f"Skipping prompt optimization due to alignment error: {alignment_result}")
+            else:
+                logger.debug("Skipping prompt optimization (no engine or alignment result).")
             return original_prompt
 
         # Create a copy of params for the alignment engine call
@@ -209,9 +240,18 @@ class PromptProcessor:
         # Preprocess the user's prompt text (basic cleaning)
         processed_prompt = self.preprocess_main_prompt(prompt)
 
+        # Check if alignment result contains an error
+        alignment_has_error = alignment_result and alignment_result.strip() and alignment_result.startswith("Error:")
+        if alignment_has_error:
+            logger.warning(f"Alignment result contains an error: {alignment_result}")
+            # Don't use the error message as alignment guidance
+            effective_alignment_result = ""
+        else:
+            effective_alignment_result = alignment_result
+
         # Optimize the preprocessed prompt using the alignment result (non-streaming)
         # Pass original params to optimize_prompt as it might use creativity etc.
-        optimized_prompt = self.optimize_prompt(processed_prompt, alignment_result, params)
+        optimized_prompt = self.optimize_prompt(processed_prompt, effective_alignment_result, params)
 
         # Extract values from params
         style = str(params.get('style', 'Professional'))
@@ -228,25 +268,42 @@ class PromptProcessor:
 
         # Construct the system prompt, incorporating alignment if available
         system_parts = []
-        # Style/Tone instructions (optional, can sometimes conflict with alignment)
-        # system_parts.append(f"Respond in a {style.lower()} style with a {tone.lower()} tone.")
-
-        if alignment_result and alignment_result.strip():
+        
+        # Always include style/tone instructions
+        system_parts.append(f"Respond in a {style.lower()} style with a {tone.lower()} tone.")
+        
+        if effective_alignment_result and effective_alignment_result.strip():
+             # Make alignment guidance more prominent and directive
              system_parts.append(
-                 "--- Alignment Guidance (Consider this as secondary context) ---\n"
-                 f"{alignment_result}\n"
-                 "--- End Alignment Guidance ---"
+                 "YOU MUST FOLLOW THIS ALIGNMENT GUIDANCE:\n"
+                 f"{effective_alignment_result}\n"
+                 "The above alignment guidance MUST influence your response content, style, and approach."
              )
+             
+             # Add explicit instruction to not ignore the alignment
+             system_parts.append(
+                "IMPORTANT: Do NOT respond as if you're a new instance with no context. You HAVE received alignment guidance above."
+             )
+        elif alignment_has_error:
+             # Add a note about alignment failure but don't include the error message in guidance
+             system_parts.append(
+                "Note: Alignment processing encountered an error, but you should still respond to the user's request normally."
+             )
+             
         system_parts.append(
-            "Focus on fulfilling the user's request below. The alignment guidance should influence *how* you respond (e.g., tone, style, constraints) but not *what* you respond about unless directly relevant. Prioritize the user's specific request."
+            "Focus on fulfilling the user's request while adhering to the alignment guidance if provided. The alignment guidance should strongly influence both *how* you respond and *what* you include in your response when relevant."
         )
         system_prompt = "\n\n".join(system_parts)
 
         # Add system prompt to params if engine supports it (Ollama 'system', OpenAI 'system' message)
         main_params['system_prompt'] = system_prompt
 
-        # Use the optimized prompt as the user's message
-        final_user_prompt = optimized_prompt
+        # Modify the user prompt to reinforce alignment if needed
+        if effective_alignment_result and effective_alignment_result.strip():
+            # For some models, including a reminder in the user prompt helps ensure alignment is followed
+            final_user_prompt = f"[Remember to follow the alignment guidance provided in the system prompt]\n\n{optimized_prompt}"
+        else:
+            final_user_prompt = optimized_prompt
 
         logger.info("Generating main response (streaming)...")
         # Generate the response using streaming

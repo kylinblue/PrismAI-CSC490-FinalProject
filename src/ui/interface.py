@@ -442,9 +442,15 @@ def create_interface(processor: PromptProcessor):
 
                     # --- Generate WITH alignment ---
                     logger.info("Generating response WITH alignment...")
+                    # Check if alignment result contains an error
+                    alignment_result = st.session_state.alignment_response_complete
+                    if alignment_result and alignment_result.startswith("Error:"):
+                        logger.warning(f"Using alignment with error: {alignment_result}")
+                        # We'll still pass it to process_main, which will handle the error appropriately
+                    
                     response_stream_with_align = processor.process_main(
                         prompt=main_prompt_input,
-                        alignment_result=st.session_state.alignment_response_complete, # Use completed alignment
+                        alignment_result=alignment_result,
                         params=main_params
                     )
                     # Stream response WITH alignment
